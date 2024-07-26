@@ -1,8 +1,10 @@
 package com.dddryinside.word;
 
+import com.dddryinside.word.service.DataBaseAccess;
+import com.dddryinside.word.service.PageManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.application.Platform;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -10,11 +12,18 @@ import java.io.IOException;
 public class Word extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Word.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        stage.setTitle("Word");
+        Image icon = new Image("icon.png");
+        stage.getIcons().add(icon);
+        PageManager.setStage(stage);
+        PageManager.setWindowSize(600, 900);
+
+        DataBaseAccess.findAuthorisedUser();
+
+        stage.setOnCloseRequest(event ->  {
+            DataBaseAccess.updateUser();
+            Platform.exit();
+        });
     }
 
     public static void main(String[] args) {

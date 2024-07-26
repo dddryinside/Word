@@ -1,0 +1,36 @@
+* {
+    -fx-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.root {
+    -primary-color:  #0095C8;
+    -secondary-color: grey;
+    -fx-background-color: white;
+}
+
+.jfx-text-field, .jfx-password-field, .jfx-combo-box, .jfx-check-box, .panel-title {
+    -fx-font-size: 14px;
+}
+
+.panel {
+    -fx-background-color: white;
+}
+
+.name-label {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.username-label {
+    -fx-font-size: 16px;
+}
+
+.hyperlink {
+    -fx-text-fill: -primary-color;
+    -fx-font-size: 14px;
+    -fx-padding: 0;
+    -fx-underline: false;
+    -fx-focus-traversal-enabled: false;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}

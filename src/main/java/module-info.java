@@ -1,6 +1,10 @@
 module com.dddryinside.word {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.kordamp.bootstrapfx.core;
+    requires lombok;
+    requires java.sql;
+    requires com.jfoenix;
 
 
     opens com.dddryinside.word to javafx.fxml;
