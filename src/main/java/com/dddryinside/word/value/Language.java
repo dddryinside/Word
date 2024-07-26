@@ -18,4 +18,13 @@ public enum Language {
         this.name = name;
         this.shortName = shortName;
     }
+
+    public static Language getLanguageByShortName(String shortName) {
+        for (Language language : Language.values()) {
+            if (language.getShortName().equals(shortName)) {
+                return language;
+            }
+        }
+        throw new IllegalArgumentException("Invalid language short name: " + shortName);
+    }
 }

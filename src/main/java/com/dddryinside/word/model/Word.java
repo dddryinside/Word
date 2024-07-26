@@ -3,16 +3,20 @@ package com.dddryinside.word.model;
 import com.dddryinside.word.value.Language;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 public class Word {
     private int id;
-    private final User user;
-    private final String word;
-    private final String translation;
-    private final Language language;
-    private final int repNumber;
+    private User user;
+    private String word;
+    private String translation;
+    private Language language;
+    private int repNumber;
 
     public Word(User user, String word, String translation, Language language, int repNumber) {
         this.user = user;

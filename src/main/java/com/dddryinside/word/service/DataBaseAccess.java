@@ -1,9 +1,13 @@
 package com.dddryinside.word.service;
 
 import com.dddryinside.word.model.User;
+import com.dddryinside.word.model.Word;
 import com.dddryinside.word.page.LogInPage;
 import com.dddryinside.word.page.MainPage;
 import com.dddryinside.word.service.dataBase.UserDB;
+import com.dddryinside.word.service.dataBase.WordDB;
+
+import java.util.List;
 
 public class DataBaseAccess {
     public static final String DB_URL = "jdbc:sqlite:./word.db";
@@ -69,5 +73,9 @@ public class DataBaseAccess {
 
     public static boolean isUsernameAvailable(String username) {
         return UserDB.isUsernameAvailable(username);
+    }
+
+    public static List<Word> getWords(int limit) {
+        return WordDB.getWords(limit);
     }
 }

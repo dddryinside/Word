@@ -3,7 +3,11 @@ package com.dddryinside.word.page;
 import com.dddryinside.word.contract.Page;
 import com.dddryinside.word.element.CreateWord;
 import com.dddryinside.word.element.Profile;
+import com.dddryinside.word.element.Root;
 import com.dddryinside.word.service.DataBaseAccess;
+import com.dddryinside.word.service.TrainingService;
+import com.dddryinside.word.value.TrainingType;
+import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,10 +30,20 @@ public class MainPage implements Page {
         panel.setBody(content);
         panel.setMaxWidth(400);
 
-        VBox container = new VBox(profile, panel);
+        JFXButton button = new JFXButton("Пройти тренировку");
+        button.setOnAction(event -> {
+            TrainingService trainingService = new TrainingService(TrainingType.LEARNING);
+            trainingService.iterate();
+        });
+
+        VBox container = new VBox(profile, panel, button);
         container.setAlignment(Pos.CENTER);
         container.setSpacing(20);
 
-        return new Scene(container);
+        Root root = new Root();
+        root.setMenuBar();
+        root.setToCenter(container);
+
+        return new Scene(root);
     }
 }

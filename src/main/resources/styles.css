@@ -14,6 +14,13 @@
 
 .panel {
     -fx-background-color: white;
+    -fx-border-color: #0095C8;
+}
+
+.panel .panel-heading {
+    -fx-background-color: #0095C8;
+    -fx-background-radius: 4px;
+    -fx-border-color: #0095C8;
 }
 
 .name-label {
