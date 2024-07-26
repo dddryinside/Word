@@ -8,7 +8,18 @@
     -fx-background-color: white;
 }
 
-.jfx-text-field, .jfx-password-field, .jfx-combo-box, .jfx-check-box, .panel-title {
+.menu-bar {
+    -fx-background-color: white;
+}
+
+.context-menu {
+    -fx-background-color: white;
+    -fx-border-width: 0px;
+    -fx-border-color: white;
+}
+
+.jfx-text-field, .jfx-password-field, .jfx-combo-box,
+.jfx-check-box, .panel-title, .jfx-radio-button {
     -fx-font-size: 14px;
 }
 

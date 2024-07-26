@@ -1,6 +1,7 @@
 package com.dddryinside.word.service;
 
 import com.dddryinside.word.contract.Page;
+import com.jfoenix.controls.JFXAlert;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

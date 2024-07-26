@@ -8,6 +8,7 @@ import com.dddryinside.word.value.AppColor;
 import com.dddryinside.word.value.Language;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -60,6 +61,7 @@ public class CreateWord extends VBox {
 
         this.getChildren().addAll(wordField, translationField, languagesBox, buttons);
         this.setSpacing(20);
+        this.setAlignment(Pos.CENTER);
         this.setMaxWidth(250);
     }
 
