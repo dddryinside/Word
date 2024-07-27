@@ -9,9 +9,9 @@ import javafx.scene.layout.VBox;
 
 public class Profile extends VBox {
     public Profile(User user) {
-        Label nameLabel = new Label(user.getName());
+/*        Label nameLabel = new Label(user.getName());
         nameLabel.setWrapText(true);
-        nameLabel.getStyleClass().add("name-label");
+        nameLabel.getStyleClass().add("name-label");*/
 
         Label username = new Label("@" + user.getUsername());
         username.getStyleClass().add("username-label");
@@ -23,7 +23,7 @@ public class Profile extends VBox {
         HBox buttonsBox = new HBox(editProfileButton, logOutButton);
         buttonsBox.setSpacing(10);
 
-        this.getChildren().addAll(nameLabel, username, buttonsBox);
+        this.getChildren().addAll(username, buttonsBox);
         this.setMaxWidth(400);
 
 /*        Background DEFAULT_BACKGROUND = new Background(new BackgroundFill(Color.LIGHTGRAY, null, null));

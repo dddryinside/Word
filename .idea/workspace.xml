@@ -4,15 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="doing training system">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/Training.java" afterDir="false" />
+    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="training system partially works">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/mfx/JavaFXThemes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/mfx/MaterialFXStylesheets.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/CreateWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/CreateWord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Root.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Root.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/PageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/PageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/TrainingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/TrainingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/AppColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/AppColor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +53,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Projects/Word/src/main/resources",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/user/.m2/repository/io/github/palexdev/materialfx/11.17.0",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.47471264",
     "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
 }]]></component>
@@ -94,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1721997661193</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="training system partially works">
+      <created>1722011054243</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722011054243</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -112,6 +130,11 @@
     <MESSAGE value="starting" />
     <MESSAGE value="login/logout and main page is working" />
     <MESSAGE value="doing training system" />
-    <option name="LAST_COMMIT_MESSAGE" value="doing training system" />
+    <MESSAGE value="training system partially works" />
+    <option name="LAST_COMMIT_MESSAGE" value="training system partially works" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

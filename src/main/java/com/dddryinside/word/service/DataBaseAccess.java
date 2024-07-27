@@ -78,4 +78,8 @@ public class DataBaseAccess {
     public static List<Word> getWords(int limit) {
         return WordDB.getWords(limit);
     }
+
+    public static List<Word> getWords() {
+        return WordDB.getWords();
+    }
 }

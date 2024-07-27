@@ -1,6 +1,7 @@
 package com.dddryinside.word.element;
 
 import com.dddryinside.word.page.MainPage;
+import com.dddryinside.word.page.VocabularyPage;
 import com.dddryinside.word.service.PageManager;
 import com.dddryinside.word.contract.Page;
 import javafx.geometry.Pos;
@@ -39,7 +40,10 @@ public class Root extends BorderPane {
         main.setOnAction(event -> PageManager.loadPage(new MainPage()));
         MenuItem settings = new MenuItem("Настройки");
         //tests.setOnAction(event -> PageManager.loadPage(new SettingsPage()));
-        menu.getItems().addAll(main, settings);
+
+        MenuItem vocabulary = new MenuItem("Словарь");
+        vocabulary.setOnAction(event -> PageManager.loadPage(new VocabularyPage()));
+        menu.getItems().addAll(main, settings, vocabulary);
 
         Menu information = new Menu("Информация");
 

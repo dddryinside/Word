@@ -20,20 +20,14 @@ import org.kordamp.bootstrapfx.scene.layout.Panel;
 public class MainPage implements Page {
     @Override
     public Scene getInterface() {
-        CreateWord createWord = new CreateWord();
         Profile profile = new Profile(DataBaseAccess.getUser());
 
-        SuperPanel panel = new SuperPanel("Добавьте слово", createWord);
-        panel.setPrimaryStyle();
 
-/*        Panel panel = new Panel("Добавьте слово");
-        panel.getStyleClass().add("panel-default");
+        CreateWord createWord = new CreateWord();
+        createWord.setMinWidth(400);
 
-        BorderPane content = new BorderPane();
-        content.setPadding(new Insets(20));
-        content.setCenter(createWord);
-        panel.setBody(content);
-        panel.setMaxWidth(400);*/
+/*        SuperPanel panel = new SuperPanel("Добавьте слово", createWord);
+        panel.setPrimaryStyle();*/
 
         JFXButton button = new JFXButton("Пройти тренировку");
         button.setOnAction(event -> {
@@ -45,7 +39,7 @@ public class MainPage implements Page {
             }
         });
 
-        VBox container = new VBox(profile, panel, button);
+        VBox container = new VBox(profile, createWord, button);
         container.setAlignment(Pos.CENTER);
         container.setSpacing(20);
 

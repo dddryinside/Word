@@ -9,6 +9,7 @@ import com.dddryinside.word.service.PageManager;
 import com.dddryinside.word.service.TrainingService;
 import com.dddryinside.word.value.AppColor;
 import com.jfoenix.controls.*;
+import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -65,6 +66,9 @@ public class TrainingPage implements Page {
         SuperPanel panel = new SuperPanel(training.getTrainingType().getName(), content);
         panel.setPrimaryStyle();
 
+        MFXCheckbox learned = new MFXCheckbox();
+        learned.setText("Больше не показывать это слово, я его уже выучил");
+
         Hyperlink continueButton;
         Hyperlink exitButton = new Hyperlink("Выйти");
 
@@ -79,6 +83,7 @@ public class TrainingPage implements Page {
             });
         } else {
             continueButton = new Hyperlink("Закончить");
+            continueButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
         }
 
         HBox buttons = new HBox(exitButton, continueButton);
@@ -86,7 +91,7 @@ public class TrainingPage implements Page {
         buttons.setMaxWidth(400);
         buttons.setSpacing(20);
 
-        VBox container = new VBox(progressBar, panel, buttons);
+        VBox container = new VBox(progressBar, panel, learned, buttons);
         container.setAlignment(Pos.CENTER);
         container.setSpacing(20);
 

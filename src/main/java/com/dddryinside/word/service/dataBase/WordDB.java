@@ -61,6 +61,37 @@ public class WordDB {
         return words;
     }
 
+    public static List<Word> getWords() {
+        List<Word> words = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
+            isWordsTableExists();
+
+            String query = "SELECT * FROM word WHERE user_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, DataBaseAccess.getUser().getId());
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    Word word = new Word();
+
+                    word.setId(resultSet.getInt("id"));
+                    word.setUser(DataBaseAccess.getUser());
+                    word.setWord(resultSet.getString("word"));
+                    word.setTranslation(resultSet.getString("translation"));
+                    word.setLanguage(Language.getLanguageByShortName(resultSet.getString("language")));
+                    word.setRepNumber(resultSet.getInt("rep_number"));
+
+                    words.add(word);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return words;
+    }
+
     private static void isWordsTableExists() {
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
             if (!tableExists(connection)) {

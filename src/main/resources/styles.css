@@ -52,3 +52,31 @@
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
+
+.table-view {
+    -fx-font-size: 14px;
+}
+
+.table-row-cell {
+    -fx-min-height: 30;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.table-view .table-row-cell:selected{
+    -fx-background-color: #F2F2F2;
+    -fx-text-fill: black;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
