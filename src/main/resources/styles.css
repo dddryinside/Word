@@ -12,14 +12,6 @@
     -fx-font-size: 14px;
 }
 
-.mfx-button {
-    -fx-border-radius: 5px;
-    -fx-background-color: -primary-color;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 5px 20px 5px 20px;
-}
-
 .delete-button {
     -fx-background-color: #FF3C3CFF
 }
@@ -149,12 +141,18 @@
     -fx-margin-top: 2px;
 }
 
-. button {
+.mfx-button {
     -fx-border-radius: 5px;
-    -fx-background-color: -primary-color;
-    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-background-color: transparent;
     -fx-font-size: 14px;
-    -fx-padding: 5px 20px 5px 20px;
+}
+
+.mfx-button:hover {
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: #F2F2F2;
+    -fx-font-size: 14px;
 }
 
 .background-radius {

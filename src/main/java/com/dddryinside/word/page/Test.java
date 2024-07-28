@@ -1,9 +1,12 @@
 package com.dddryinside.word.page;
 
 import com.dddryinside.word.contract.Page;
-import com.dddryinside.word.element.HPane;
+import com.dddryinside.word.element.VPane;
+import com.dddryinside.word.element.TrainingStart;
 import com.dddryinside.word.model.User;
 import com.dddryinside.word.service.DataBaseAccess;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.enums.ButtonType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,12 +16,68 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class Test implements Page {
     @Override
     public Scene getInterface() {
+        HBox profilePanel = new HBox(getAvatar(), setupProfileInfo());
+        profilePanel.setSpacing(30);
+
+        VPane vPane = new VPane(profilePanel);
+        vPane.setWidth(500);
+        vPane.setHeight(200);
+        vPane.setShadow();
+        vPane.setBorderRadius();
+        vPane.setSpacing(20);
+        vPane.setPadding(new Insets(20));
+
+
+        FontIcon newWordIcon = new FontIcon();
+        newWordIcon.setIconSize(25);
+        newWordIcon.setIconLiteral("bi-plus-circle");
+
+        MFXButton newWordButton = new MFXButton("Добавить слово");
+        newWordButton.setGraphic(newWordIcon);
+        newWordButton.setButtonType(ButtonType.FLAT);
+
+
+        FontIcon settingsIcon = new FontIcon();
+        settingsIcon.setIconSize(25);
+        settingsIcon.setIconLiteral("bi-gear");
+
+        MFXButton settingsButton = new MFXButton("Настройки");
+        settingsButton.setGraphic(settingsIcon);
+        settingsButton.setButtonType(ButtonType.FLAT);
+
+
+        FontIcon infoIcon = new FontIcon();
+        infoIcon.setIconSize(25);
+        infoIcon.setIconLiteral("bi-info-circle");
+
+        MFXButton infoButton = new MFXButton("О приложении");
+        infoButton.setGraphic(infoIcon);
+        infoButton.setButtonType(ButtonType.FLAT);
+
+
+        HBox iconsPane = new HBox(newWordButton, settingsButton, infoButton);
+        vPane.getChildren().add(iconsPane);
+        iconsPane.setSpacing(10);
+
+
+        TrainingStart trainingStart = new TrainingStart();
+
+
+
+        VBox container = new VBox(vPane, trainingStart);
+        container.setSpacing(30);
+        container.setAlignment(Pos.CENTER);
+
+        return new Scene(container);
+    }
+
+    private VBox setupProfileInfo() {
         User user = new User("Черников Илья", "dddryinside", "12345678", true);
 
         Label name = new Label(user.getName());
@@ -34,20 +93,7 @@ public class Test implements Page {
         HBox buttonsBox = new HBox(editProfileButton, logOutButton);
         buttonsBox.setSpacing(10);
 
-        VBox info = new VBox(name, username, buttonsBox);
-
-        HPane hPane = new HPane(getAvatar(), info);
-        hPane.setWidth(500);
-        hPane.setHeight(150);
-        hPane.setShadow();
-        hPane.setBorderRadius();
-        hPane.setSpacing(30);
-        hPane.setPadding(new Insets(20));
-
-        HBox container = new HBox(hPane);
-        container.setAlignment(Pos.CENTER);
-
-        return new Scene(container);
+        return new VBox(name, username, buttonsBox);
     }
 
     private ImageView getAvatar() {

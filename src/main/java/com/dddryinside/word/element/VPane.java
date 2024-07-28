@@ -2,17 +2,13 @@ package com.dddryinside.word.element;
 
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class HPane extends HBox {
-    public HPane(Node... nodes) {
+public class VPane extends VBox {
+    public VPane(Node... nodes) {
         super(nodes);
     }
 
