@@ -66,7 +66,7 @@ public class TrainingPage implements Page {
         SuperPanel panel = new SuperPanel(training.getTrainingType().getName(), content);
         panel.setPrimaryStyle();
 
-        MFXCheckbox learned = new MFXCheckbox();
+        JFXCheckBox learned = new JFXCheckBox();
         learned.setText("Больше не показывать это слово, я его уже выучил");
 
         Hyperlink continueButton;

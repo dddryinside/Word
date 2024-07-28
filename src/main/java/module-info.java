@@ -6,6 +6,7 @@ module com.dddryinside.word {
     requires java.sql;
     requires com.jfoenix;
     requires MaterialFX;
+    requires de.jensd.fx.glyphs.fontawesome;
 
     opens com.dddryinside.word to javafx.fxml;
     exports com.dddryinside.word;

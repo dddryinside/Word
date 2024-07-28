@@ -9,9 +9,13 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.materialfx.enums.ButtonType;
+import io.github.palexdev.materialfx.enums.FloatMode;
 import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.beans.InvalidationListener;
@@ -19,8 +23,12 @@ import javafx.beans.property.*;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import lombok.Getter;
 
 import java.util.*;
@@ -28,8 +36,19 @@ import java.util.*;
 public class VocabularyPage implements Page {
     @Override
     public Scene getInterface() {
+        MFXTextField search = new MFXTextField();
+        search.setFloatMode(FloatMode.DISABLED);
+        search.setMinWidth(250);
+        search.setPromptText("Поиск");
+
+        HBox topPanel = new HBox(search);
+        topPanel.setPadding(new Insets(10));
+        topPanel.setSpacing(10);
+        topPanel.setMaxWidth(900);
+
+
         TableView<TableWord> table = new TableView<>();
-        table.setMaxWidth(800);
+        table.setMaxWidth(900);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn<TableWord, String> wordColumn = new TableColumn<>("Слово");
@@ -49,9 +68,23 @@ public class VocabularyPage implements Page {
         ObservableList<TableWord> data = getTableWordsFromDB();
         table.setItems(data);
 
+        MFXButton deleteButton = new MFXButton("Удалить");
+        deleteButton.getStyleClass().add("delete-button");
+
+        HBox bottomPanel = new HBox(deleteButton);
+        bottomPanel.setPadding(new Insets(10));
+        bottomPanel.setSpacing(10);
+        bottomPanel.setMaxWidth(900);
+
+        bottomPanel.setAlignment(Pos.BASELINE_RIGHT);
+
+        VBox container = new VBox(topPanel, table, bottomPanel);
+        container.setSpacing(10);
+        container.setAlignment(Pos.CENTER);
+
         Root rootPane = new Root();
         rootPane.setMenuBar();
-        rootPane.setToCenter(table);
+        rootPane.setToCenter(container);
 
         return new Scene(rootPane);
     }

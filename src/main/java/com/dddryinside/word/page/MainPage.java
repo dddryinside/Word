@@ -1,10 +1,7 @@
 package com.dddryinside.word.page;
 
 import com.dddryinside.word.contract.Page;
-import com.dddryinside.word.element.CreateWord;
-import com.dddryinside.word.element.Profile;
-import com.dddryinside.word.element.Root;
-import com.dddryinside.word.element.SuperPanel;
+import com.dddryinside.word.element.*;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
 import com.dddryinside.word.service.TrainingService;
@@ -23,8 +20,8 @@ public class MainPage implements Page {
         Profile profile = new Profile(DataBaseAccess.getUser());
 
 
-        CreateWord createWord = new CreateWord();
-        createWord.setMinWidth(400);
+        /*CreateWord createWord = new CreateWord();
+        createWord.setMinWidth(400);*/
 
 /*        SuperPanel panel = new SuperPanel("Добавьте слово", createWord);
         panel.setPrimaryStyle();*/
@@ -39,7 +36,9 @@ public class MainPage implements Page {
             }
         });
 
-        VBox container = new VBox(profile, createWord, button);
+        TrainingStart trainingStart = new TrainingStart();
+
+        VBox container = new VBox(profile, trainingStart, button);
         container.setAlignment(Pos.CENTER);
         container.setSpacing(20);
 

@@ -4,21 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="training system partially works">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/mfx/JavaFXThemes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/mfx/MaterialFXStylesheets.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" afterDir="false" />
+    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="doing vocabulary page">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/HPane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/TrainingStart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/avatar.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/CreateWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/CreateWord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Root.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Root.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/mfx/JavaFXThemes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/mfx/JavaFXThemes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/AppColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/AppColor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
     </list>
@@ -54,11 +52,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/user/.m2/repository/io/github/palexdev/materialfx/11.17.0",
-    "project.structure.last.edited": "Modules",
+    "last_opened_file_path": "C:/Users/user/Desktop/MaterialFX.jar",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.47471264",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -66,7 +64,7 @@
       <recent name="C:\Projects\Word\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Word">
     <configuration name="Word" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.dddryinside.word.Word" />
       <module name="Word" />
@@ -74,6 +72,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="materialfx-11.17.0.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$MAVEN_REPOSITORY$/io/github/palexdev/materialfx/11.17.0/materialfx-11.17.0.jar!/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JAR Application.materialfx-11.17.0.jar" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -112,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722011054243</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="doing vocabulary page">
+      <created>1722085939885</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722085939885</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,7 +145,8 @@
     <MESSAGE value="login/logout and main page is working" />
     <MESSAGE value="doing training system" />
     <MESSAGE value="training system partially works" />
-    <option name="LAST_COMMIT_MESSAGE" value="training system partially works" />
+    <MESSAGE value="doing vocabulary page" />
+    <option name="LAST_COMMIT_MESSAGE" value="doing vocabulary page" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,25 +1,28 @@
-package com.dddryinside.word.element;
+package com.dddryinside.word.page;
 
+import com.dddryinside.word.contract.Page;
+import com.dddryinside.word.element.HPane;
 import com.dddryinside.word.model.User;
 import com.dddryinside.word.service.DataBaseAccess;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.utils.FontAwesomeIconFactory;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+public class Test implements Page {
+    @Override
+    public Scene getInterface() {
+        User user = new User("Черников Илья", "dddryinside", "12345678", true);
 
-public class Profile extends VBox {
-    public Profile(User user) {
-/*        Label nameLabel = new Label(user.getName());
-        nameLabel.setWrapText(true);
-        nameLabel.getStyleClass().add("name-label");*/
+        Label name = new Label(user.getName());
+        name.getStyleClass().add("name-label");
 
         Label username = new Label("@" + user.getUsername());
         username.getStyleClass().add("username-label");
@@ -31,18 +34,23 @@ public class Profile extends VBox {
         HBox buttonsBox = new HBox(editProfileButton, logOutButton);
         buttonsBox.setSpacing(10);
 
+        VBox info = new VBox(name, username, buttonsBox);
 
+        HPane hPane = new HPane(getAvatar(), info);
+        hPane.setWidth(500);
+        hPane.setHeight(150);
+        hPane.setShadow();
+        hPane.setBorderRadius();
+        hPane.setSpacing(30);
+        hPane.setPadding(new Insets(20));
 
-        this.getChildren().addAll(getAvatar(), username, buttonsBox);
-        this.setMaxWidth(400);
+        HBox container = new HBox(hPane);
+        container.setAlignment(Pos.CENTER);
 
-
-
-/*        Background DEFAULT_BACKGROUND = new Background(new BackgroundFill(Color.LIGHTGRAY, null, null));
-        this.setBackground(DEFAULT_BACKGROUND);*/
+        return new Scene(container);
     }
 
-    private StackPane getAvatar() {
+    private ImageView getAvatar() {
         Image image = new Image("avatar.png"); // Замените путь на путь к вашему изображению
         ImageView imageView = new ImageView(image);
 
@@ -61,9 +69,6 @@ public class Profile extends VBox {
         imageView.setPreserveRatio(true); // Сохранение пропорций изображения
         imageView.setSmooth(true); // Плавное отображение изображения
 
-        // Добавление ImageView в сцену
-        StackPane root = new StackPane(imageView);
-
-        return root;
+        return imageView;
     }
 }

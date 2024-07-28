@@ -8,8 +8,24 @@
     -fx-background-color: white;
 }
 
+.mfx-text-field {
+    -fx-font-size: 14px;
+}
+
+.mfx-button {
+    -fx-border-radius: 5px;
+    -fx-background-color: -primary-color;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 20px 5px 20px;
+}
+
+.delete-button {
+    -fx-background-color: #FF3C3CFF
+}
+
 .menu-bar {
-    -fx-background-color: white;
+    -fx-background-color: #F5F1F9;
 }
 
 .context-menu {
@@ -55,6 +71,9 @@
 
 .table-view {
     -fx-font-size: 14px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-border-color: #EDEDED;
 }
 
 .table-row-cell {
@@ -70,13 +89,74 @@
     -fx-text-fill: black;
 }
 
-.table-view .table-row-cell:selected{
-    -fx-background-color: #F2F2F2;
+.table-view:focused .table-row-cell:selected .table-cell {
+    -fx-background-color: #EDEDED;
     -fx-text-fill: black;
+    -fx-border-color: #EDEDED;
 }
 
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-background-color: white;
     -fx-text-fill: black;
+}
+
+
+
+
+.combo-box {
+    -fx-font-size: 14px;
+    -fx-focus-color: -primary-color;
+    -fx-background-color: white;
+    -fx-border-color: #D6D6D6;
+    -fx-border-radius: 5px;
+}
+
+.list-cell {
+    -fx-background-radius: 5px;
+}
+
+/*
+.list-cell:hover {
+    -fx-background-color: -primary-color;
+    -fx-text-fill: black;
+}
+*/
+
+/*.list-cell:selected .combo-box {
+    -fx-background-color: white;
+}*/
+
+.list-view .list-cell:selected {
+    -fx-background-color: #EDEDED;
+    -fx-text-fill: black;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #EDEDED;
+    -fx-text-fill: black;
+}
+
+.combo-box .list-view {
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-effect: none;
+    -fx-background-color: white;
+    -fx-border-color: #D6D6D6;
+}
+
+.combo-box .combo-popup {
+    -fx-margin-top: 2px;
+}
+
+. button {
+    -fx-border-radius: 5px;
+    -fx-background-color: -primary-color;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 20px 5px 20px;
+}
+
+.background-radius {
+    -fx-background-radius: 20px;
 }
