@@ -1,34 +1,45 @@
 package com.dddryinside.word.page;
 
 import com.dddryinside.word.contract.Page;
+import com.dddryinside.word.element.VPane;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
 import com.dddryinside.word.value.AppColor;
+import io.github.palexdev.materialfx.controls.MFXCheckbox;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class LogInPage implements Page {
     @Override
     public Scene getInterface() {
-        JFXTextField usernameField = new JFXTextField();
-        usernameField.setFocusColor(AppColor.BLUE.getColor());
+        FontIcon personIcon = new FontIcon();
+        personIcon.setIconSize(35);
+        personIcon.setIconLiteral("bi-person-fill");
+        VBox.setMargin(personIcon, new Insets(0, 0, 20, 0));
+
+        TextField usernameField = new TextField();
         usernameField.setMaxWidth(250);
         usernameField.setPromptText("username");
 
-        JFXPasswordField passwordField = new JFXPasswordField();
-        passwordField.setFocusColor(AppColor.BLUE.getColor());
+        TextField passwordField = new TextField();
         passwordField.setMaxWidth(250);
         passwordField.setPromptText("пароль");
 
-        JFXCheckBox stayAuthorised = new JFXCheckBox("Оставаться авторизованным");
+        CheckBox stayAuthorised = new CheckBox("Оставаться авторизованным");
         stayAuthorised.setMinWidth(250);
-        stayAuthorised.setCheckedColor(AppColor.BLUE.getColor());
+
 
         Hyperlink logInButton = new Hyperlink("Войти");
         logInButton.setOnAction(event -> {
@@ -45,13 +56,22 @@ public class LogInPage implements Page {
         regButton.setOnAction(event -> PageManager.loadPage(new RegPage()));
 
         HBox buttons = new HBox(logInButton, regButton);
+        VBox.setMargin(buttons, new Insets(20, 0, 0, 0));
+        buttons.setAlignment(Pos.CENTER_RIGHT);
         buttons.setMaxWidth(250);
         buttons.setSpacing(20);
 
-        VBox container = new VBox();
+
+        VPane vPane = new VPane(personIcon, usernameField, passwordField, stayAuthorised, buttons);
+        vPane.setSpacing(20);
+        vPane.setShadow();
+        vPane.setBorderRadius();
+        vPane.setAlignment(Pos.CENTER);
+        vPane.setPadding(new Insets(20));
+
+        GridPane container = new GridPane();
+        container.getChildren().add(vPane);
         container.setAlignment(Pos.CENTER);
-        container.getChildren().addAll(usernameField, passwordField, stayAuthorised, buttons);
-        container.setSpacing(20);
 
         return new Scene(container);
     }

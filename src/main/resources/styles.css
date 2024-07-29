@@ -158,3 +158,34 @@
 .background-radius {
     -fx-background-radius: 20px;
 }
+
+.text-field {
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+    -fx-border-color: #D6D6D6;
+    -fx-border-radius: 5px;
+}
+
+.check-box {
+    -fx-font-size: 14px;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #D6D6D6;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #0095C8;
+    -fx-border-color: #0095C8;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box .mark {
+ 	-fx-shape: "M1.73,12.91 8.1,19.28 22.79,4.59 22.79,1.59 8.1,16.28 1.73,9.91";
+}

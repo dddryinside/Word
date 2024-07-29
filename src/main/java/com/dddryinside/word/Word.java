@@ -2,7 +2,6 @@ package com.dddryinside.word;
 
 import com.dddryinside.word.mfx.JavaFXThemes;
 import com.dddryinside.word.mfx.MaterialFXStylesheets;
-import com.dddryinside.word.page.Test;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
 
@@ -23,22 +22,21 @@ public class Word extends Application {
         PageManager.setStage(stage);
         PageManager.setWindowSize(600, 900);
 
-        PageManager.loadPage(new Test());
-
-        /*UserAgentBuilder.builder()
+/*        UserAgentBuilder.builder()
                 .themes(JavaFXThemes.MODENA) // Optional if you don't need JavaFX's default theme, still recommended though
                 .themes(MaterialFXStylesheets.forAssemble(true)) // Adds the MaterialFX's default theme. The boolean argument is to include legacy controls
                 .setDeploy(true) // Whether to deploy each theme's assets on a temporary dir on the disk
                 .setResolveAssets(true)
                 .build()
-                .setGlobal();
+                .setGlobal();*/
+
 
         DataBaseAccess.findAuthorisedUser();
 
         stage.setOnCloseRequest(event ->  {
             DataBaseAccess.updateUser();
             Platform.exit();
-        });*/
+        });
     }
 
     public static void main(String[] args) {

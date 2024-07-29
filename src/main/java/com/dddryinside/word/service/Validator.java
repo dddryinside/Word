@@ -1,5 +1,7 @@
 package com.dddryinside.word.service;
 
+import com.dddryinside.word.value.Language;
+
 public class Validator {
     public static boolean isNameValid(String name) {
         if (name == null || name.trim().isEmpty()) {
@@ -28,6 +30,33 @@ public class Validator {
             return false;
         } else if (password.length() < 8) {
             PageManager.showNotification("Пароль не должен быть короче 8 символов!");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean isWordValid(String word) {
+        if (word == null || word.trim().isEmpty()) {
+            PageManager.showNotification("Кажется, вы забыли ввести слово!");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean isTranslationValid(String translation) {
+        if (translation == null || translation.trim().isEmpty()) {
+            PageManager.showNotification("Кажется, вы забыли ввести перевод!");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean isLanguageValid(Language language) {
+        if (language == null) {
+            PageManager.showNotification("Кажется, вы забыли выбрать язык!");
             return false;
         } else {
             return true;

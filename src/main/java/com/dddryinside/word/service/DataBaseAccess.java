@@ -75,6 +75,10 @@ public class DataBaseAccess {
         return UserDB.isUsernameAvailable(username);
     }
 
+    public static void saveWord(Word word) {
+        WordDB.saveWord(word);
+    }
+
     public static List<Word> getWords(int limit) {
         return WordDB.getWords(limit);
     }

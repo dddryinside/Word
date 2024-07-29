@@ -3,7 +3,6 @@ package com.dddryinside.word.element;
 import com.dddryinside.word.page.MainPage;
 import com.dddryinside.word.page.VocabularyPage;
 import com.dddryinside.word.service.PageManager;
-import com.dddryinside.word.contract.Page;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Menu;
