@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="doing design">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/NewWordPage.java" afterDir="false" />
+    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="new design">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/AboutPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/ResourceLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Root.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Root.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/TrainingStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/TrainingStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/LogInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/LogInPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/RegPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/RegPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722188379381</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="new design">
+      <created>1722253049134</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1722253049134</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -163,7 +166,8 @@
     <MESSAGE value="doing vocabulary page" />
     <MESSAGE value="doing design, user page" />
     <MESSAGE value="doing design" />
-    <option name="LAST_COMMIT_MESSAGE" value="doing design" />
+    <MESSAGE value="new design" />
+    <option name="LAST_COMMIT_MESSAGE" value="new design" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

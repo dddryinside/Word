@@ -141,14 +141,14 @@
     -fx-margin-top: 2px;
 }
 
-.mfx-button {
+.button {
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-background-color: transparent;
     -fx-font-size: 14px;
 }
 
-.mfx-button:hover {
+.button:hover {
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-background-color: #F2F2F2;
@@ -177,6 +177,10 @@
     -fx-background-radius: 5px;
 }
 
+.check-box .mark {
+ 	-fx-shape: "M1.73,12.91 8.1,19.28 22.79,4.59 22.79,1.59 8.1,16.28 1.73,9.91";
+}
+
 .check-box:selected .box {
     -fx-background-color: #0095C8;
     -fx-border-color: #0095C8;
@@ -186,6 +190,16 @@
     -fx-background-color: white;
 }
 
-.check-box .mark {
- 	-fx-shape: "M1.73,12.91 8.1,19.28 22.79,4.59 22.79,1.59 8.1,16.28 1.73,9.91";
+.delete-check-box:selected .box {
+    -fx-background-color: red;
+    -fx-border-color: red;
+}
+
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #F2F2F2;
+}
+
+.scroll-bar {
+    -fx-background-color: white;
 }

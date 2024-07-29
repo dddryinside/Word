@@ -1,24 +1,13 @@
 package com.dddryinside.word.page;
 
 import com.dddryinside.word.contract.Page;
-import com.dddryinside.word.element.Root;
 import com.dddryinside.word.model.Word;
 import com.dddryinside.word.service.DataBaseAccess;
-import com.dddryinside.word.value.AppColor;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.dddryinside.word.service.PageManager;
+import com.dddryinside.word.service.ResourceLoader;
+import com.dddryinside.word.value.Language;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXTableColumn;
-import io.github.palexdev.materialfx.controls.MFXTableView;
-import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.enums.ButtonType;
-import io.github.palexdev.materialfx.enums.FloatMode;
-import io.github.palexdev.materialfx.filter.IntegerFilter;
-import io.github.palexdev.materialfx.filter.StringFilter;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,8 +16,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.util.StringConverter;
 import lombok.Getter;
 
 import java.util.*;
@@ -36,19 +25,38 @@ import java.util.*;
 public class VocabularyPage implements Page {
     @Override
     public Scene getInterface() {
-        MFXTextField search = new MFXTextField();
-        search.setFloatMode(FloatMode.DISABLED);
-        search.setMinWidth(250);
-        search.setPromptText("Поиск");
+        BorderPane borderPane = new BorderPane();
+        borderPane.setTop(setupTopPanel());
+        borderPane.setCenter(setupTable());
+        borderPane.setBottom(setupBottomPanel());
 
-        HBox topPanel = new HBox(search);
-        topPanel.setPadding(new Insets(10));
-        topPanel.setSpacing(10);
-        topPanel.setMaxWidth(900);
+        return new Scene(borderPane);
+    }
 
+    public HBox setupBottomPanel() {
+        HBox deleteButtonContent = new HBox(ResourceLoader.loadIcon("bi-trash", 20),
+                new Label("Удалить выбранное"));
+        deleteButtonContent.setSpacing(10);
+        Button deleteButton = new Button();
+        deleteButton.setGraphic(deleteButtonContent);
 
+        HBox editButtonContent = new HBox(ResourceLoader.loadIcon("bi-pencil", 20),
+                new Label("Редактировать слово"));
+        editButtonContent.setSpacing(10);
+        Button editButton = new Button();
+        editButton.setGraphic(editButtonContent);
+
+        HBox bottomPanel = new HBox(editButton, deleteButton);
+        bottomPanel.setPadding(new Insets(20));
+        bottomPanel.setSpacing(10);
+
+        bottomPanel.setAlignment(Pos.CENTER);
+
+        return bottomPanel;
+    }
+
+    private TableView<TableWord> setupTable() {
         TableView<TableWord> table = new TableView<>();
-        table.setMaxWidth(900);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn<TableWord, String> wordColumn = new TableColumn<>("Слово");
@@ -60,33 +68,59 @@ public class VocabularyPage implements Page {
         TableColumn<TableWord, String> statusColumn = new TableColumn<>("Статус");
         statusColumn.setCellValueFactory(param -> param.getValue().getStatus());
 
-        TableColumn<TableWord, JFXCheckBox> deleteColumn = new TableColumn<>("Удалить");
+        TableColumn<TableWord, CheckBox> deleteColumn = new TableColumn<>("Удалить");
         deleteColumn.setCellValueFactory(param -> param.getValue().getDelete());
 
-        table.getColumns().addAll(wordColumn, translationColumn, statusColumn, deleteColumn);
+        table.getColumns().add(wordColumn);
+        table.getColumns().add(translationColumn);
+        table.getColumns().add(statusColumn);
+        table.getColumns().add(deleteColumn);
+        //table.getColumns().addAll(wordColumn, translationColumn, statusColumn, deleteColumn);
+        table.setMaxWidth(810);
 
         ObservableList<TableWord> data = getTableWordsFromDB();
         table.setItems(data);
 
-        MFXButton deleteButton = new MFXButton("Удалить");
-        deleteButton.getStyleClass().add("delete-button");
+        return table;
+    }
 
-        HBox bottomPanel = new HBox(deleteButton);
-        bottomPanel.setPadding(new Insets(10));
-        bottomPanel.setSpacing(10);
-        bottomPanel.setMaxWidth(900);
+    private HBox setupTopPanel() {
+        MFXButton escapeButton = new MFXButton(null);
+        escapeButton.setGraphic(ResourceLoader.loadIcon("bi-arrow-left"));
+        escapeButton.setButtonType(ButtonType.FLAT);
+        escapeButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
 
-        bottomPanel.setAlignment(Pos.BASELINE_RIGHT);
+        ObservableList<Language> languages = FXCollections.observableArrayList(Language.values());
+        ComboBox<Language> languagesComboBox = new ComboBox<>(languages);
+        languagesComboBox.setMinWidth(170);
 
-        VBox container = new VBox(topPanel, table, bottomPanel);
-        container.setSpacing(10);
-        container.setAlignment(Pos.CENTER);
+        languagesComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Language object) {
+                return object != null ? object.getName() : "";
+            }
 
-        Root rootPane = new Root();
-        rootPane.setMenuBar();
-        rootPane.setToCenter(container);
+            @Override
+            public Language fromString(String string) {
+                return null;
+            }
+        });
 
-        return new Scene(rootPane);
+        TextField searchField = new TextField();
+        searchField.setMinWidth(250);
+        searchField.setPromptText("Поиск");
+
+        Button searchButton = new Button(null);
+        searchButton.setGraphic(ResourceLoader.loadIcon("bi-search"));
+        searchButton.setMinHeight(32);
+        //searchButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
+
+        HBox topPanel = new HBox(escapeButton, languagesComboBox, searchField, searchButton);
+        topPanel.setPadding(new Insets(10));
+        topPanel.setSpacing(10);
+        topPanel.setAlignment(Pos.CENTER);
+
+        return topPanel;
     }
 
     private ObservableList<TableWord> getTableWordsFromDB() {
@@ -105,19 +139,19 @@ public class VocabularyPage implements Page {
         private final StringProperty word;
         private final StringProperty translation;
         private final StringProperty status;
-        private final SimpleObjectProperty<JFXCheckBox> delete;
+        private final SimpleObjectProperty<CheckBox> delete;
 
         public TableWord(String word, String translation) {
             this.word = new SimpleStringProperty(word);
             this.translation = new SimpleStringProperty(translation);
             this.status = new SimpleStringProperty("В изучении");
 
-            JFXCheckBox delete = new JFXCheckBox();
-            delete.setCheckedColor(AppColor.RED.getColor());
+            CheckBox delete = new CheckBox();
+            delete.getStyleClass().add("delete-check-box");
             this.delete = new SimpleObjectProperty<>(delete);
         }
 
-        public ObservableValue<JFXCheckBox> getDelete() {
+        public ObservableValue<CheckBox> getDelete() {
             return delete;
         }
     }

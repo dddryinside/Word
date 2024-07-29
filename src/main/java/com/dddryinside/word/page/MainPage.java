@@ -79,6 +79,7 @@ public class MainPage implements Page {
         vocabularyButton.setButtonType(ButtonType.FLAT);
         vocabularyButton.setMinWidth(200);
         vocabularyButton.setMinHeight(40);
+        vocabularyButton.setOnAction(event -> PageManager.loadPage(new VocabularyPage()));
 
 
 
@@ -111,6 +112,7 @@ public class MainPage implements Page {
         infoButton.setButtonType(ButtonType.FLAT);
         infoButton.setMinWidth(200);
         infoButton.setMinHeight(40);
+        infoButton.setOnAction(event -> PageManager.loadPage(new AboutPage()));
 
 
         VBox container = new VBox();
@@ -120,7 +122,7 @@ public class MainPage implements Page {
     }
 
     private VBox setupProfileInfo() {
-        User user = new User("Черников Илья", "dddryinside", "12345678", true);
+        User user = DataBaseAccess.getUser();
 
         Label name = new Label(user.getName());
         name.getStyleClass().add("name-label");
