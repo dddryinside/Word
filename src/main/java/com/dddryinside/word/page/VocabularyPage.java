@@ -20,6 +20,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -33,9 +34,24 @@ public class VocabularyPage implements Page {
     @Override
     public Scene getInterface() {
         BorderPane borderPane = new BorderPane();
-        borderPane.setTop(setupTopPanel());
-        borderPane.setCenter(setupTable());
-        borderPane.setBottom(setupBottomPanel());
+
+        ObservableList<TableWord> data = getTableWordsFromDB();
+        if (!data.isEmpty()) {
+            borderPane.setTop(setupTopPanel());
+            borderPane.setCenter(setupTable(data));
+            borderPane.setBottom(setupBottomPanel());
+        } else {
+            Label emptyDataBaseMessage = new Label("В вашем словаре пусто. ");
+            emptyDataBaseMessage.setFont(Font.font(16));
+
+            Hyperlink escapeButton = new Hyperlink("Назад");
+            escapeButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
+
+            HBox content = new HBox(emptyDataBaseMessage, escapeButton);
+            content.setAlignment(Pos.CENTER);
+
+            borderPane.setCenter(content);
+        }
 
         return new Scene(borderPane);
     }
@@ -62,7 +78,7 @@ public class VocabularyPage implements Page {
         return bottomPanel;
     }
 
-    private TableView<TableWord> setupTable() {
+    private TableView<TableWord> setupTable(ObservableList<TableWord> data) {
         TableView<TableWord> table = new TableView<>();
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -84,7 +100,6 @@ public class VocabularyPage implements Page {
         table.getColumns().add(deleteColumn);
         table.setMaxWidth(800);
 
-        ObservableList<TableWord> data = getTableWordsFromDB();
         table.setItems(data);
 
         return table;

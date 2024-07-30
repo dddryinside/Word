@@ -8,6 +8,10 @@
     -fx-background-color: white;
 }
 
+.label {
+    -fx-font-size: 14px;
+}
+
 .mfx-text-field {
     -fx-font-size: 14px;
 }
@@ -108,17 +112,6 @@
     -fx-background-radius: 5px;
 }
 
-/*
-.list-cell:hover {
-    -fx-background-color: -primary-color;
-    -fx-text-fill: black;
-}
-*/
-
-/*.list-cell:selected .combo-box {
-    -fx-background-color: white;
-}*/
-
 .list-view .list-cell:selected {
     -fx-background-color: #EDEDED;
     -fx-text-fill: black;
@@ -159,15 +152,42 @@
     -fx-background-radius: 20px;
 }
 
-.text-field {
+.text-field, .password-field {
     -fx-font-size: 14px;
     -fx-background-color: white;
     -fx-border-color: #D6D6D6;
     -fx-border-radius: 5px;
 }
 
+.spinner {
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+    -fx-border-color: #D6D6D6;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-width: 1px;
+}
+
+.spinner .text-input {
+    -fx-border-width: 0;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-body-color: white;
+    -fx-border-color: white;
+    -fx-background-color: white;
+}
+
 .check-box {
     -fx-font-size: 14px;
+}
+
+.spinner .increment-button {
+    -fx-background-color: #4CAF50; /* Цвет фона */
+    -fx-text-fill: white; /* Цвет текста */
+    -fx-font-size: 14px; /* Размер шрифта */
+    -fx-padding: 5px 10px; /* Внутренние отступы */
 }
 
 .check-box .box {
@@ -203,4 +223,8 @@
 
 .scroll-bar {
     -fx-background-color: white;
+}
+
+.scroll-bar:horizontal {
+    -fx-opacity: 0;
 }

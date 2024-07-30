@@ -15,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -37,11 +38,11 @@ public class RegPage implements Page {
         usernameField.setMaxWidth(250);
         usernameField.setPromptText("username");
 
-        TextField passwordField = new TextField();
+        PasswordField passwordField = new PasswordField();
         passwordField.setMaxWidth(250);
         passwordField.setPromptText("пароль");
 
-        TextField repeatPasswordField = new TextField();
+        PasswordField repeatPasswordField = new PasswordField();
         repeatPasswordField.setMaxWidth(250);
         repeatPasswordField.setPromptText("повторите пароль");
 
@@ -72,7 +73,7 @@ public class RegPage implements Page {
         buttons.setMaxWidth(250);
         buttons.setSpacing(20);
 
-        VPane vPane = new VPane(personIcon, nameField, usernameField, passwordField, stayAuthorised, buttons);
+        VPane vPane = new VPane(personIcon, nameField, usernameField, passwordField, repeatPasswordField, stayAuthorised, buttons);
         vPane.setSpacing(20);
         vPane.setShadow();
         vPane.setBorderRadius();

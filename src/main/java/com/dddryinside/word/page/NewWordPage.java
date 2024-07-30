@@ -5,6 +5,7 @@ import com.dddryinside.word.element.VPane;
 import com.dddryinside.word.model.Word;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
+import com.dddryinside.word.service.ResourceLoader;
 import com.dddryinside.word.service.Validator;
 import com.dddryinside.word.value.Language;
 import javafx.collections.FXCollections;
@@ -28,6 +29,10 @@ import org.kordamp.ikonli.javafx.FontIcon;
 public class NewWordPage implements Page {
     @Override
     public Scene getInterface() {
+        FontIcon infoIcon = ResourceLoader.loadIcon("bi-plus-circle", 25);
+        infoIcon.setIconColor(Paint.valueOf("GREEN"));
+        VBox.setMargin(infoIcon, new Insets(0, 0, 20, 0));
+
         TextField wordField = new TextField();
         wordField.setPromptText("Слово");
         wordField.setMaxWidth(250);
@@ -63,7 +68,7 @@ public class NewWordPage implements Page {
         buttons.setSpacing(20);
         buttons.setMaxWidth(250);
 
-        VPane vPane = new VPane(wordField, translationField, languagesComboBox, buttons);
+        VPane vPane = new VPane(infoIcon, wordField, translationField, languagesComboBox, buttons);
         vPane.setSpacing(20);
         vPane.setShadow();
         vPane.setBorderRadius();

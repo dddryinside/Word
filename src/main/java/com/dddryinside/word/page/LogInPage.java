@@ -9,10 +9,7 @@ import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -33,7 +30,7 @@ public class LogInPage implements Page {
         usernameField.setMaxWidth(250);
         usernameField.setPromptText("username");
 
-        TextField passwordField = new TextField();
+        PasswordField passwordField = new PasswordField();
         passwordField.setMaxWidth(250);
         passwordField.setPromptText("пароль");
 

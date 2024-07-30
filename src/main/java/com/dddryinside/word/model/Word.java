@@ -16,13 +16,13 @@ public class Word {
     private String word;
     private String translation;
     private Language language;
-    private int repNumber;
+    private int status;
 
     public Word(User user, String word, String translation, Language language, int repNumber) {
         this.user = user;
         this.word = word;
         this.translation = translation;
         this.language = language;
-        this.repNumber = repNumber;
+        this.status = repNumber;
     }
 }

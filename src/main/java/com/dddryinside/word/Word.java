@@ -1,12 +1,8 @@
 package com.dddryinside.word;
 
-import com.dddryinside.word.mfx.JavaFXThemes;
-import com.dddryinside.word.mfx.MaterialFXStylesheets;
-import com.dddryinside.word.page.Test;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
 
-import io.github.palexdev.materialfx.theming.UserAgentBuilder;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.image.Image;

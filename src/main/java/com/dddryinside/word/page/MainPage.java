@@ -96,6 +96,7 @@ public class MainPage implements Page {
         settingsButton.setButtonType(ButtonType.FLAT);
         settingsButton.setMinWidth(200);
         settingsButton.setMinHeight(40);
+        settingsButton.setOnAction(event -> PageManager.loadPage(new SettingsPage()));
 
 
 
