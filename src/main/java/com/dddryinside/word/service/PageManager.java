@@ -18,6 +18,10 @@ public class PageManager {
         PageManager.stage = stage;
     }
 
+    public static Stage getStage() {
+        return PageManager.stage;
+    }
+
     public static void loadPage(Page page) {
         Scene scene = page.getInterface();
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());

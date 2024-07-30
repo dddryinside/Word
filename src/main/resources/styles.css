@@ -196,8 +196,9 @@
 }
 
 
-.scroll-bar:vertical .thumb {
+.scroll-bar .thumb {
     -fx-background-color: #F2F2F2;
+    -fx-background-radius: 5px;
 }
 
 .scroll-bar {

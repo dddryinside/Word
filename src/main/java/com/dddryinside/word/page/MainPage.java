@@ -144,7 +144,7 @@ public class MainPage implements Page {
     }
 
     private ImageView getAvatar() {
-        Image image = new Image("avatar.png");
+        Image image = new Image("AvatarMaker.png");
         ImageView imageView = new ImageView(image);
 
         // Создание круга
