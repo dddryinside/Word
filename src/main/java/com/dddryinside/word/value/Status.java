@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum Status {
-    LEARNED("В изучении"),
-    LEARN("Изучено");
+    LEARNED("Изучено"),
+    LEARN("В изучении");
 
 
     private final String name;

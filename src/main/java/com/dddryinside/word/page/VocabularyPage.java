@@ -14,7 +14,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,7 +21,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
@@ -31,6 +29,7 @@ import lombok.Getter;
 import java.util.*;
 
 public class VocabularyPage implements Page {
+
     @Override
     public Scene getInterface() {
         BorderPane borderPane = new BorderPane();
@@ -57,21 +56,22 @@ public class VocabularyPage implements Page {
     }
 
     public HBox setupBottomPanel() {
-        HBox deleteButtonContent = new HBox(ResourceLoader.loadIcon("bi-trash", 20),
-                new Label("Удалить выбранное"));
-        deleteButtonContent.setSpacing(10);
-        Button deleteButton = new Button();
-        deleteButton.setGraphic(deleteButtonContent);
+        HBox prevButtonContent = new HBox(ResourceLoader.loadIcon("bi-arrow-left-circle", 20));
+        prevButtonContent.setSpacing(10);
+        Button prevButton = new Button();
+        prevButton.setGraphic(prevButtonContent);
 
-        HBox editButtonContent = new HBox(ResourceLoader.loadIcon("bi-pencil", 20),
-                new Label("Редактировать слово"));
-        editButtonContent.setSpacing(10);
-        Button editButton = new Button();
-        editButton.setGraphic(editButtonContent);
+        HBox nextButtonContent = new HBox(ResourceLoader.loadIcon("bi-arrow-right-circle", 20));
+        nextButtonContent.setSpacing(10);
+        Button nextButton = new Button();
+        nextButton.setGraphic(nextButtonContent);
 
-        HBox bottomPanel = new HBox(editButton, deleteButton);
+        Label pageNumberLabel = new Label("1");
+        pageNumberLabel.setFont(Font.font(14));
+
+        HBox bottomPanel = new HBox(prevButton, pageNumberLabel, nextButton);
         bottomPanel.setPadding(new Insets(20));
-        bottomPanel.setSpacing(10);
+        bottomPanel.setSpacing(20);
 
         bottomPanel.setAlignment(Pos.CENTER);
 
@@ -80,27 +80,38 @@ public class VocabularyPage implements Page {
 
     private TableView<TableWord> setupTable(ObservableList<TableWord> data) {
         TableView<TableWord> table = new TableView<>();
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn<TableWord, String> wordColumn = new TableColumn<>("Слово");
         wordColumn.setCellValueFactory(param -> param.getValue().getWord());
+        wordColumn.setMinWidth(250);
+        wordColumn.setMaxWidth(250);
 
         TableColumn<TableWord, String> translationColumn = new TableColumn<>("Перевод");
         translationColumn.setCellValueFactory(param -> param.getValue().getTranslation());
+        translationColumn.setMinWidth(250);
+        translationColumn.setMaxWidth(250);
 
         TableColumn<TableWord, String> statusColumn = new TableColumn<>("Статус");
         statusColumn.setCellValueFactory(param -> param.getValue().getStatus());
+        statusColumn.setMinWidth(250);
+        statusColumn.setMaxWidth(250);
 
-        TableColumn<TableWord, CheckBox> deleteColumn = new TableColumn<>("Удалить");
-        deleteColumn.setCellValueFactory(param -> param.getValue().getDelete());
+        TableColumn<TableWord, Button> editColumn = new TableColumn<>();
+        editColumn.setCellValueFactory(param -> param.getValue().getEditButton());
+        editColumn.setMinWidth(50);
+        editColumn.setMaxWidth(50);
 
         table.getColumns().add(wordColumn);
         table.getColumns().add(translationColumn);
         table.getColumns().add(statusColumn);
-        table.getColumns().add(deleteColumn);
+        table.getColumns().add(editColumn);
         table.setMaxWidth(800);
 
         table.setItems(data);
+
+/*        table.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedWordProperty.set(newValue);
+        });*/
 
         return table;
     }
@@ -194,9 +205,7 @@ public class VocabularyPage implements Page {
             popupStage.show();
         });
 
-        cancelButton.setOnAction(event -> {
-            popupStage.hide();
-        });
+        cancelButton.setOnAction(event -> popupStage.hide());
 
         return button;
     }
@@ -206,7 +215,7 @@ public class VocabularyPage implements Page {
 
         ObservableList<TableWord> tableWords = FXCollections.observableArrayList();
         for (Word word : words) {
-            tableWords.add(new TableWord(word.getWord(), word.getTranslation()));
+            tableWords.add(new TableWord(word.getWord(), word.getTranslation(), word.getStatus(), word));
         }
         return tableWords;
     }
@@ -217,20 +226,29 @@ public class VocabularyPage implements Page {
         private final StringProperty word;
         private final StringProperty translation;
         private final StringProperty status;
-        private final SimpleObjectProperty<CheckBox> delete;
+        private final SimpleObjectProperty<Button> edit;
+        private final Word wordObject;
 
-        public TableWord(String word, String translation) {
+        public TableWord(String word, String translation, int status, Word wordObject) {
             this.word = new SimpleStringProperty(word);
             this.translation = new SimpleStringProperty(translation);
-            this.status = new SimpleStringProperty("В изучении");
 
-            CheckBox delete = new CheckBox();
-            delete.getStyleClass().add("delete-check-box");
-            this.delete = new SimpleObjectProperty<>(delete);
+            if (status == 0) {
+                this.status = new SimpleStringProperty(Status.LEARN.getName());
+            } else {
+                this.status = new SimpleStringProperty(Status.LEARNED.getName());
+            }
+
+            this.wordObject = wordObject;
+
+            Button edit = new Button();
+            edit.setOnAction(event -> PageManager.loadPage(new EditWordPage(wordObject)));
+            edit.setGraphic(ResourceLoader.loadIcon("bi-pencil"));
+            this.edit = new SimpleObjectProperty<>(edit);
         }
 
-        public ObservableValue<CheckBox> getDelete() {
-            return delete;
+        public ObservableValue<Button> getEditButton() {
+            return edit;
         }
     }
 }

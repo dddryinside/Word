@@ -85,10 +85,10 @@
     -fx-text-fill: black;
 }
 
-.table-view:focused .table-row-cell:selected .table-cell {
-    -fx-background-color: #EDEDED;
+.table-row-cell:selected .table-cell {
+    -fx-background-color: #F2F2F2;
     -fx-text-fill: black;
-    -fx-border-color: #EDEDED;
+    -fx-border-color: #F2F2F2;
 }
 
 .table-view .column-header,

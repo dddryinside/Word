@@ -23,11 +23,17 @@ public class SettingsPage implements Page {
         FontIcon settingsIcon = ResourceLoader.loadIcon("bi-gear", 35);
         VBox.setMargin(settingsIcon, new Insets(0, 0, 20, 0));
 
-        Label trainingLengthLabel = new Label("Длинна тренировки (вопросов):");
+        Label trainingLengthLabel = new Label("Длина тренировки (вопросов):");
         Spinner<Integer> trainingLengthInput = new Spinner<>();
-        trainingLengthInput.setMinWidth(200);
         trainingLengthInput.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 100, SettingAccess.getTrainingLength()));
+        trainingLengthInput.setMaxWidth(80);
+
+        HBox trainingLengthBox = new HBox(trainingLengthLabel, trainingLengthInput);
+        trainingLengthBox.setSpacing(5);
+        trainingLengthBox.setAlignment(Pos.BASELINE_CENTER);
+
+
 
         Hyperlink exitButton = new Hyperlink("Отмена");
         exitButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
@@ -42,7 +48,7 @@ public class SettingsPage implements Page {
         buttons.setSpacing(20);
         buttons.setAlignment(Pos.CENTER_RIGHT);
 
-        VPane vPane = new VPane(settingsIcon, trainingLengthLabel, trainingLengthInput, buttons);
+        VPane vPane = new VPane(settingsIcon, trainingLengthBox, buttons);
         vPane.setSpacing(20);
         vPane.setShadow();
         vPane.setBorderRadius();
