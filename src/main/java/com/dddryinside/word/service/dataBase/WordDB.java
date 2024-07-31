@@ -1,8 +1,10 @@
 package com.dddryinside.word.service.dataBase;
 
+import com.dddryinside.word.model.Training;
 import com.dddryinside.word.model.Word;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.value.Language;
+import com.dddryinside.word.value.TrainingType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -28,36 +30,22 @@ public class WordDB {
         }
     }
 
-    public static List<Word> getWords(int limit) {
-        List<Word> words = new ArrayList<>();
-
+    public static void updateWord(Word word) throws Exception {
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
             isWordsTableExists();
 
-            String query = "SELECT * FROM word WHERE user_id = ? LIMIT ?";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setInt(1, DataBaseAccess.getUser().getId());
-                statement.setInt(2, limit);
-                ResultSet resultSet = statement.executeQuery();
-
-                while (resultSet.next()) {
-                    Word word = new Word();
-
-                    word.setId(resultSet.getInt("id"));
-                    word.setUser(DataBaseAccess.getUser());
-                    word.setWord(resultSet.getString("word"));
-                    word.setTranslation(resultSet.getString("translation"));
-                    word.setLanguage(Language.getLanguageByShortName(resultSet.getString("language")));
-                    word.setStatus(resultSet.getInt("status"));
-
-                    words.add(word);
-                }
+            String updateQuery = "UPDATE word SET word = ?, translation = ?, language = ?, status = ? WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(updateQuery)) {
+                statement.setString(1, word.getWord());
+                statement.setString(2, word.getTranslation());
+                statement.setString(3, word.getLanguage().getShortName());
+                statement.setInt(4, word.getStatus());
+                statement.setInt(5, word.getId());
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception("DataBase error in updateWord()");
         }
-
-        return words;
     }
 
     public static List<Word> getWords() {
@@ -89,6 +77,71 @@ public class WordDB {
         }
 
         return words;
+    }
+
+    public static int getWordsAmount(TrainingType trainingType, Language language) {
+        int tableSize = 0;
+
+        try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
+            isWordsTableExists();
+
+            int status = 0;
+            if (trainingType == TrainingType.REPETITION) {
+                status = 1;
+            }
+
+            String query = "SELECT COUNT(*) AS table_size FROM word WHERE user_id = ? AND status = ? AND language = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, DataBaseAccess.getUser().getId());
+                statement.setInt(2, status);
+                statement.setString(3, language.getShortName());
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    tableSize = resultSet.getInt("table_size");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return tableSize;
+    }
+
+    public static Word getRandomWord(TrainingType trainingType, Language language) {
+        try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
+            isWordsTableExists();
+
+            int status = 0;
+            if (trainingType == TrainingType.REPETITION) {
+                status = 1;
+            }
+
+            String query = "SELECT * FROM word WHERE user_id = ? AND status = ? AND language = ? ORDER BY RANDOM() LIMIT 1";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, DataBaseAccess.getUser().getId());
+                statement.setInt(2, status);
+                statement.setString(3, language.getShortName());
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    Word word = new Word();
+
+                    word.setId(resultSet.getInt("id"));
+                    word.setUser(DataBaseAccess.getUser());
+                    word.setWord(resultSet.getString("word"));
+                    word.setTranslation(resultSet.getString("translation"));
+                    word.setLanguage(Language.getLanguageByShortName(resultSet.getString("language")));
+                    word.setStatus(resultSet.getInt("status"));
+
+                    return word;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
     }
 
     private static void isWordsTableExists() {

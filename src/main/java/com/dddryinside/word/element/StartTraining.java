@@ -1,5 +1,6 @@
 package com.dddryinside.word.element;
 
+import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
 import com.dddryinside.word.service.TrainingService;
 import com.dddryinside.word.value.Language;
@@ -15,11 +16,12 @@ import javafx.scene.paint.Paint;
 import javafx.util.StringConverter;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class TrainingStart extends HBox {
-    public TrainingStart() {
+public class StartTraining extends HBox {
+    public StartTraining() {
         ObservableList<TrainingType> trainingTypes = FXCollections.observableArrayList(TrainingType.values());
         ComboBox<TrainingType> trainingTypesComboBox = new ComboBox<>(trainingTypes);
         trainingTypesComboBox.setMinWidth(170);
+        trainingTypesComboBox.setValue(TrainingType.LEARNING);
 
         trainingTypesComboBox.setConverter(new StringConverter<>() {
             @Override
@@ -48,6 +50,7 @@ public class TrainingStart extends HBox {
                 return null;
             }
         });
+        languagesComboBox.setValue(Language.EN);
 
         FontIcon goIcon = new FontIcon();
         goIcon.setIconSize(25);
@@ -63,11 +66,13 @@ public class TrainingStart extends HBox {
         goButton.setButtonType(ButtonType.FLAT);
 
         goButton.setOnAction(event -> {
-            TrainingService.initializeTraining(TrainingType.LEARNING);
-            if (TrainingService.getWords().size() < 10) {
-                PageManager.showNotification("Для того, что бы начать тренировку в вашем словаре должно быть минимум 10 слов!");
+            TrainingType trainingType = trainingTypesComboBox.getValue();
+            Language language = languagesComboBox.getValue();
+
+            if (DataBaseAccess.getWordsAmount(trainingType, language) < 5) {
+                PageManager.showNotification("Для того, что бы начать тренировку в вашем словаре должно быть не меньше 5 подходящих слов!");
             } else {
-                TrainingService.iterate();
+                TrainingService.startTraining(trainingTypesComboBox.getValue(), languagesComboBox.getValue());
             }
         });
 

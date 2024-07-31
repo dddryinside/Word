@@ -16,14 +16,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.util.StringConverter;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class EditWordPage implements Page {
+public class UpdateWordPage implements Page {
     private final Word word;
 
-    public EditWordPage(Word word) {
+    public UpdateWordPage(Word word) {
         this.word = word;
     }
     @Override
@@ -58,6 +57,17 @@ public class EditWordPage implements Page {
         languagesComboBox.setValue(word.getLanguage());
 
 
+
+        CheckBox statusCheckBox = new CheckBox("Слово изучено");
+        if (word.getStatus() == 0) {
+            statusCheckBox.setSelected(false);
+        } else {
+            statusCheckBox.setSelected(true);
+        }
+        HBox statusCheckBoxContainer = new HBox(statusCheckBox);
+        statusCheckBoxContainer.setAlignment(Pos.BASELINE_LEFT);
+
+
         HBox deleteButtonContent = new HBox(ResourceLoader.loadIcon("bi-trash", 20),
                 new Label("Удалить слово"));
         deleteButtonContent.setAlignment(Pos.CENTER);
@@ -87,7 +97,7 @@ public class EditWordPage implements Page {
 
 
 
-        VPane vPane = new VPane(editIcon, wordField, translationField, languagesComboBox, deleteButton, buttons);
+        VPane vPane = new VPane(editIcon, wordField, translationField, languagesComboBox, statusCheckBoxContainer, deleteButton, buttons);
         vPane.setSpacing(20);
         vPane.setShadow();
         vPane.setBorderRadius();

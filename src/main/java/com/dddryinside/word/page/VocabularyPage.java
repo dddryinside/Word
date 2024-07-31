@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import lombok.Getter;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.*;
 
@@ -41,7 +42,7 @@ public class VocabularyPage implements Page {
             borderPane.setBottom(setupBottomPanel());
         } else {
             Label emptyDataBaseMessage = new Label("В вашем словаре пусто. ");
-            emptyDataBaseMessage.setFont(Font.font(16));
+            emptyDataBaseMessage.setFont(Font.font(14));
 
             Hyperlink escapeButton = new Hyperlink("Назад");
             escapeButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
@@ -117,30 +118,34 @@ public class VocabularyPage implements Page {
     }
 
     private HBox setupTopPanel() {
-        MFXButton escapeButton = new MFXButton(null);
-        escapeButton.setGraphic(ResourceLoader.loadIcon("bi-arrow-left"));
-        escapeButton.setButtonType(ButtonType.FLAT);
+        Button escapeButton = new Button();
+        escapeButton.setGraphic(ResourceLoader.loadIcon("bi-back", 20));
         escapeButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
 
         TextField searchField = new TextField();
         searchField.setMinWidth(250);
         searchField.setPromptText("Поиск");
 
-        Button searchButton = new Button(null);
-        searchButton.setGraphic(ResourceLoader.loadIcon("bi-search"));
-        searchButton.setMinHeight(32);
+        Button searchButton = new Button();
+        searchButton.setGraphic(ResourceLoader.loadIcon("bi-search", 20));
         //searchButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
 
-        HBox topPanel = new HBox(escapeButton, setupPopupFilter(), searchField, searchButton);
-        topPanel.setPadding(new Insets(10));
+        HBox topPanel = new HBox(escapeButton, searchField, searchButton, setupPopupFilter());
+        topPanel.setPadding(new Insets(10, 0, 10, 0));
         topPanel.setSpacing(10);
-        topPanel.setAlignment(Pos.CENTER);
+        topPanel.setMinWidth(800);
+        topPanel.setAlignment(Pos.BASELINE_LEFT);
 
-        return topPanel;
+        HBox container = new HBox(topPanel);
+        container.setAlignment(Pos.CENTER);
+
+        return container;
     }
 
     private Button setupPopupFilter() {
-        Button button = new Button("Фильтр");
+        Button button = new Button();
+        FontIcon filterButtonIcon = ResourceLoader.loadIcon("bi-gear" ,20);
+        button.setGraphic(filterButtonIcon);
 
         ObservableList<Language> languageValues = FXCollections.observableArrayList(Language.values());
         ComboBox<Language> languagesFilter = new ComboBox<>(languageValues);
@@ -242,7 +247,7 @@ public class VocabularyPage implements Page {
             this.wordObject = wordObject;
 
             Button edit = new Button();
-            edit.setOnAction(event -> PageManager.loadPage(new EditWordPage(wordObject)));
+            edit.setOnAction(event -> PageManager.loadPage(new UpdateWordPage(wordObject)));
             edit.setGraphic(ResourceLoader.loadIcon("bi-pencil"));
             this.edit = new SimpleObjectProperty<>(edit);
         }

@@ -2,7 +2,7 @@ package com.dddryinside.word.page;
 
 import com.dddryinside.word.contract.Page;
 import com.dddryinside.word.element.VPane;
-import com.dddryinside.word.element.TrainingStart;
+import com.dddryinside.word.element.StartTraining;
 import com.dddryinside.word.model.User;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
@@ -26,7 +26,7 @@ public class MainPage implements Page {
         HBox profilePanel = new HBox(getAvatar(), setupProfileInfo());
         profilePanel.setSpacing(30);
 
-        TrainingStart trainingStart = new TrainingStart();
+        StartTraining trainingStart = new StartTraining();
         VBox leftBox = new VBox(profilePanel, trainingStart);
         leftBox.setSpacing(35);
 

@@ -60,7 +60,10 @@ public class NewWordPage implements Page {
         Hyperlink escapeButton = new Hyperlink("Отмена");
         escapeButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
         Hyperlink saveButton = new Hyperlink("Сохранить");
-        saveButton.setOnAction(event -> saveWord(wordField.getText(), translationField.getText(), languagesComboBox.getValue()));
+        saveButton.setOnAction(event -> {
+            saveWord(wordField.getText(), translationField.getText(), languagesComboBox.getValue());
+            PageManager.loadPage(new MainPage());
+        });
 
         HBox buttons = new HBox(escapeButton, saveButton);
         buttons.setAlignment(Pos.CENTER_RIGHT);

@@ -6,6 +6,8 @@ import com.dddryinside.word.page.LogInPage;
 import com.dddryinside.word.page.MainPage;
 import com.dddryinside.word.service.dataBase.UserDB;
 import com.dddryinside.word.service.dataBase.WordDB;
+import com.dddryinside.word.value.Language;
+import com.dddryinside.word.value.TrainingType;
 
 import java.util.List;
 
@@ -79,11 +81,29 @@ public class DataBaseAccess {
         WordDB.saveWord(word);
     }
 
+    public static int getWordsAmount(TrainingType trainingType, Language language) {
+        return WordDB.getWordsAmount(trainingType, language);
+    }
+
+/*
     public static List<Word> getWords(int limit) {
         return WordDB.getWords(limit);
     }
+*/
 
     public static List<Word> getWords() {
         return WordDB.getWords();
+    }
+
+    public static Word getRandomWord(TrainingType trainingType, Language language) {
+        return WordDB.getRandomWord(trainingType, language);
+    }
+
+    public static void updateWord(Word word) {
+        try {
+            WordDB.updateWord(word);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

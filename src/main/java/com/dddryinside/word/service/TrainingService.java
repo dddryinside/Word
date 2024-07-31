@@ -3,31 +3,44 @@ package com.dddryinside.word.service;
 import com.dddryinside.word.model.Training;
 import com.dddryinside.word.model.Word;
 import com.dddryinside.word.page.TrainingPage;
+import com.dddryinside.word.value.Language;
 import com.dddryinside.word.value.TrainingType;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class TrainingService {
     private static TrainingType trainingType;
-    private static List<Word> words;
+    private static Language language;
     private static int iteration = 0;
+    private static Word currentWord;
+    private static List<Word> learnedWords = new ArrayList<>();
 
-    public static void initializeTraining (TrainingType trainingType) {
+    public static void startTraining(TrainingType trainingType, Language language) {
         TrainingService.trainingType = trainingType;
-        TrainingService.words = DataBaseAccess.getWords(10);
-        Collections.shuffle(words);
+        TrainingService.language = language;
+
+        iterate();
+    }
+
+    public static void stopTraining() {
+        for (Word word : learnedWords) {
+            word.setStatus(1);
+            DataBaseAccess.updateWord(word);
+        }
+
+        iteration = 0;
     }
 
     public static void iterate() {
+        currentWord = DataBaseAccess.getRandomWord(trainingType, language);
         Training training = new Training();
 
-        training.setWord(words.get(iteration));
+        training.setWord(currentWord);
         training.setTrainingType(trainingType);
         training.setOptions(getOptions());
-        training.setSize(words.size());
+        training.setSize(SettingAccess.getTrainingLength());
         training.setIteration(iteration);
 
         iteration += 1;
@@ -38,30 +51,41 @@ public class TrainingService {
     private static List<String> getOptions() {
         List<String> options = new ArrayList<>();
         while (options.size() != 3) {
-            int randomIndex = ThreadLocalRandom.current().nextInt(words.size());
-            String randomOption = words.get(randomIndex).getTranslation();
-            if (!randomOption.equals(words.get(iteration).getTranslation())) {
+            Word randomWord = DataBaseAccess.getRandomWord(trainingType, language);
 
-                boolean alreadyExist = false;
-                for (String option : options) {
-                    if (option.equals(randomOption)) {
-                        alreadyExist = true;
-
-                        break;
-                    }
-                }
-
-                if (!alreadyExist) {
-                    options.add(randomOption);
+            boolean alreadyExist = false;
+            for (String option : options) {
+                if (option.equals(randomWord.getTranslation())) {
+                    alreadyExist = true;
+                    break;
                 }
             }
+
+            if (!alreadyExist && !randomWord.getTranslation().equals(currentWord.getTranslation())) {
+                options.add(randomWord.getTranslation());
+            }
         }
-        options.add(words.get(iteration).getTranslation());
+
+        options.add(currentWord.getTranslation());
         Collections.shuffle(options);
         return options;
     }
 
-    public static List<Word> getWords() {
-        return words;
+    public static void addLearnedWord(Word word) {
+        learnedWords.add(word);
+    }
+
+    public static void removeLearnedWord(Word word) {
+        learnedWords.removeIf(learnedWord -> learnedWord.getId() == word.getId());
+    }
+
+    public static boolean isWordLeaned(Word word) {
+        for (Word learnedWord : learnedWords) {
+            if (learnedWord.getId() == word.getId()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
