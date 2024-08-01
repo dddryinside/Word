@@ -1,6 +1,7 @@
 package com.dddryinside.word.page;
 
 import com.dddryinside.word.contract.Page;
+import com.dddryinside.word.element.StatisticChart;
 import com.dddryinside.word.element.VPane;
 import com.dddryinside.word.element.StartTraining;
 import com.dddryinside.word.model.User;
@@ -43,7 +44,11 @@ public class MainPage implements Page {
         vPane.setPadding(new Insets(20));
         vPane.setAlignment(Pos.CENTER);
 
-        VBox container = new VBox(vPane);
+
+        StatisticChart statisticChart = new StatisticChart();
+
+        VBox container = new VBox(vPane, statisticChart);
+        container.setSpacing(20);
         container.setAlignment(Pos.CENTER);
 
         return new Scene(container);

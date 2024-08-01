@@ -228,3 +228,21 @@
 .scroll-bar:horizontal {
     -fx-opacity: 0;
 }
+
+
+
+
+
+
+
+
+.chart-series-line,
+.chart-legend-item-symbol,
+.chart-line-symbol {
+    -fx-stroke: -primary-color;
+    -fx-background-color: -primary-color, white;
+}
+
+.chart-plot-background, .chart-legend {
+    -fx-background-color: white;
+}

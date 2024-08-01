@@ -1,6 +1,6 @@
 package com.dddryinside.word.service;
 
-import com.dddryinside.word.model.Training;
+import com.dddryinside.word.model.TrainingIteration;
 import com.dddryinside.word.model.Word;
 import com.dddryinside.word.page.TrainingPage;
 import com.dddryinside.word.value.Language;
@@ -35,7 +35,7 @@ public class TrainingService {
 
     public static void iterate() {
         currentWord = DataBaseAccess.getRandomWord(trainingType, language);
-        Training training = new Training();
+        TrainingIteration training = new TrainingIteration();
 
         training.setWord(currentWord);
         training.setTrainingType(trainingType);

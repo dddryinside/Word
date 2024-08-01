@@ -34,8 +34,6 @@ public class UserDB {
             String sql = "UPDATE user SET name = ?, username = ?, password = ?, avatar = ?, learning_language = ?, is_authorised = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
-                System.out.println(user.toString());
-
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getUsername());
                 statement.setString(3, user.getPassword());

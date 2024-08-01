@@ -1,15 +1,18 @@
 package com.dddryinside.word.service;
 
+import com.dddryinside.word.model.Training;
 import com.dddryinside.word.model.User;
 import com.dddryinside.word.model.Word;
 import com.dddryinside.word.page.LogInPage;
 import com.dddryinside.word.page.MainPage;
+import com.dddryinside.word.service.dataBase.TrainingDB;
 import com.dddryinside.word.service.dataBase.UserDB;
 import com.dddryinside.word.service.dataBase.WordDB;
 import com.dddryinside.word.value.Avatar;
 import com.dddryinside.word.value.Language;
 import com.dddryinside.word.value.TrainingType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseAccess {
@@ -105,5 +108,40 @@ public class DataBaseAccess {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void saveTrainingResult() {
+        Training todaysTraining = null;
+        try {
+            todaysTraining = TrainingDB.wasThereTrainingToday();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (todaysTraining == null) {
+            try {
+                TrainingDB.createNewTrainingToday();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                TrainingDB.incrementTodaysTraining(todaysTraining);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static List<Training> getTrainingHistory() {
+        List<Training> trainingHistory = new ArrayList<>();
+
+        try {
+            trainingHistory = TrainingDB.getTrainingHistory();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return trainingHistory;
     }
 }

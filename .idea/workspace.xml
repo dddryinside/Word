@@ -4,33 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="made a lot of improvements">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/UpdateUserPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/Avatar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/avatar-men-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/avatar-men-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/avatar-men-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/avatar-men-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/avatar-woman-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/avatar-woman-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/avatar-woman-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/avatar-woman-4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="Reworked the hotel table in the database, added profile editing, updated the main page and a few more improvements and fixes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/StatisticChart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/TrainingIteration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/TrainingDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/CreateWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/CreateWord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/StartTraining.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/StartTraining.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Root.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/Training.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/RegPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/RegPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/PageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/PageManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/TrainingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/TrainingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/UserDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/UserDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/Language.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AvatarMaker.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/avatar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/avatar_default.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -197,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722458043426</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Reworked the hotel table in the database, added profile editing, updated the main page and a few more improvements and fixes">
+      <created>1722538126170</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1722538126170</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -225,7 +220,8 @@
     <MESSAGE value="I made working settings and continued to work on the vocabulary page" />
     <MESSAGE value="worked on vocabulary and made new custom notification window" />
     <MESSAGE value="made a lot of improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="made a lot of improvements" />
+    <MESSAGE value="Reworked the hotel table in the database, added profile editing, updated the main page and a few more improvements and fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reworked the hotel table in the database, added profile editing, updated the main page and a few more improvements and fixes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

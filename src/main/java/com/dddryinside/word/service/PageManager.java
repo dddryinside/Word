@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -66,6 +67,7 @@ public class PageManager {
         infoIcon.setIconColor(Paint.valueOf("#0095C8"));
         Label messageLabel = new Label(message);
         messageLabel.setWrapText(true);
+        messageLabel.setFont(Font.font(14));
 
         HBox infoContainer = new HBox(infoIcon, messageLabel);
         infoContainer.setSpacing(20);

@@ -1,18 +1,13 @@
 package com.dddryinside.word.page;
 
 import com.dddryinside.word.contract.Page;
-import com.dddryinside.word.element.Root;
-import com.dddryinside.word.element.SuperLabel;
-import com.dddryinside.word.element.SuperPanel;
 import com.dddryinside.word.element.VPane;
-import com.dddryinside.word.model.Training;
-import com.dddryinside.word.model.Word;
+import com.dddryinside.word.model.TrainingIteration;
+import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
 import com.dddryinside.word.service.TrainingService;
 import com.dddryinside.word.value.AppColor;
-import com.dddryinside.word.value.Language;
 import com.jfoenix.controls.*;
-import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,9 +17,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class TrainingPage implements Page {
-    private final Training training;
+    private final TrainingIteration training;
 
-    public TrainingPage(Training training) {
+    public TrainingPage(TrainingIteration training) {
         this.training = training;
     }
 
@@ -111,6 +106,7 @@ public class TrainingPage implements Page {
             continueButton = new Hyperlink("Закончить");
             continueButton.setOnAction(event -> {
                 TrainingService.stopTraining();
+                DataBaseAccess.saveTrainingResult();
                 PageManager.loadPage(new MainPage());
             });
         }
