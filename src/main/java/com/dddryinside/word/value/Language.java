@@ -25,6 +25,7 @@ public enum Language {
                 return language;
             }
         }
-        throw new IllegalArgumentException("Invalid language short name: " + shortName);
+
+        return null;
     }
 }

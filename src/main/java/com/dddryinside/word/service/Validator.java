@@ -8,7 +8,12 @@ public class Validator {
             PageManager.showNotification("Кажется, вы забыли ввести имя!");
             return false;
         } else {
-            return true;
+            if (name.length() > 15) {
+                PageManager.showNotification("Сократите поле имени и фамилии до 15 символов!");
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 

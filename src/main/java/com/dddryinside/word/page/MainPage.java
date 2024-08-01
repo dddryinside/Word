@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -28,14 +29,14 @@ public class MainPage implements Page {
 
         StartTraining trainingStart = new StartTraining();
         VBox leftBox = new VBox(profilePanel, trainingStart);
-        leftBox.setSpacing(35);
+        leftBox.setSpacing(25);
+        leftBox.setMaxWidth(400);
 
         HBox horizontalContainer = new HBox(leftBox, setupMenuButtons());
-        horizontalContainer.setSpacing(30);
+        horizontalContainer.setSpacing(40);
 
         VPane vPane = new VPane(horizontalContainer);
-        vPane.setWidth(700);
-        vPane.setHeight(250);
+        vPane.setWidth(800);
         vPane.setShadow();
         vPane.setBorderRadius();
         vPane.setSpacing(20);
@@ -44,6 +45,7 @@ public class MainPage implements Page {
 
         VBox container = new VBox(vPane);
         container.setAlignment(Pos.CENTER);
+
         return new Scene(container);
     }
 
@@ -127,11 +129,13 @@ public class MainPage implements Page {
 
         Label name = new Label(user.getName());
         name.getStyleClass().add("name-label");
+        name.setWrapText(true);
 
         Label username = new Label("@" + user.getUsername());
         username.getStyleClass().add("username-label");
 
         Hyperlink editProfileButton = new Hyperlink("Редактировать");
+        editProfileButton.setOnAction(event -> PageManager.loadPage(new UpdateUserPage()));
         Hyperlink logOutButton = new Hyperlink("Выйти");
         logOutButton.setOnAction(event -> DataBaseAccess.logOut());
 
@@ -139,13 +143,13 @@ public class MainPage implements Page {
         buttonsBox.setSpacing(10);
 
         VBox container = new VBox(name, username, buttonsBox);
-        container.setMinWidth(300);
+        container.setMinWidth(350);
 
         return container;
     }
 
     private ImageView getAvatar() {
-        Image image = new Image("AvatarMaker.png");
+        Image image = new Image(DataBaseAccess.getUser().getAvatar().getFile());
         ImageView imageView = new ImageView(image);
 
         // Создание круга

@@ -1,41 +1,33 @@
 package com.dddryinside.word.model;
 
+import com.dddryinside.word.value.Avatar;
+import com.dddryinside.word.value.Language;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
     private int id;
-    private final String name;
-    private final String username;
-    private final String password;
+    private String name;
+    private String username;
+    private String password;
+    private Avatar avatar;
+    private Language learningLanguage;
     public boolean authorised;
-
-    public User (int id, String name, String username, String password) {
-        this.id = id;
-        this.name = name;
-        this.username = username;
-        this.password = password;
-    }
-
-    public User (String name, String username, String password, boolean stayAuthorised) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.authorised = stayAuthorised;
-    }
-
-    public void setAuthorised(boolean authorised) {
-        this.authorised = authorised;
-    }
 
     @Override
     public String toString() {
         return "id = " + id +
                 "\nname = " + name +
-                "\nusername = " +
+                "\nusername = " + username +
                 "\npassword = " + password +
-                "\nis_authorised = " + authorised;
+                "\navatar = " + avatar +
+                "\nlearning_language = " + learningLanguage +
+                "\nauthorised = " + authorised;
     }
 }

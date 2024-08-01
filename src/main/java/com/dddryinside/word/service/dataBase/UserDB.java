@@ -2,6 +2,8 @@ package com.dddryinside.word.service.dataBase;
 
 import com.dddryinside.word.model.User;
 import com.dddryinside.word.service.DataBaseAccess;
+import com.dddryinside.word.value.Avatar;
+import com.dddryinside.word.value.Language;
 
 import java.sql.*;
 
@@ -10,30 +12,37 @@ public class UserDB {
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
             isUserTableExists();
 
-            String insertQuery = "INSERT INTO user (name, username, password, is_authorised) " +
-                    "VALUES (?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO user (name, username, password, avatar, learning_language, is_authorised) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(insertQuery)) {
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getUsername());
                 statement.setString(3, user.getPassword());
-                statement.setInt(4, user.isAuthorised() ? 1 : 0);
+                statement.setString(4, user.getAvatar().getFile());
+                statement.setString(5, user.getLearningLanguage().getShortName());
+                statement.setInt(6, user.isAuthorised() ? 1 : 0);
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new Exception(e);
         }
     }
 
     public static void updateUser(User user) throws Exception {
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
-            String sql = "UPDATE user SET name = ?, username = ?, password = ?, is_authorised = ? WHERE id = ?";
+            String sql = "UPDATE user SET name = ?, username = ?, password = ?, avatar = ?, learning_language = ?, is_authorised = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
+
+                System.out.println(user.toString());
 
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getUsername());
                 statement.setString(3, user.getPassword());
-                statement.setInt(4, user.isAuthorised() ? 1 : 0);
-                statement.setInt(5, user.getId());
+                statement.setString(4, user.getAvatar().getFile());
+                statement.setString(5, user.getLearningLanguage().getShortName());
+                statement.setInt(6, user.isAuthorised() ? 1 : 0);
+                statement.setInt(7, user.getId());
 
                 int rowsAffected = statement.executeUpdate();
                 if (rowsAffected == 0) {
@@ -41,6 +50,7 @@ public class UserDB {
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new Exception(e);
         }
     }
@@ -49,7 +59,7 @@ public class UserDB {
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
             isUserTableExists();
 
-            String insertQuery = "SELECT id, name, username, password FROM user WHERE username = ? AND password = ?";
+            String insertQuery = "SELECT * FROM user WHERE username = ? AND password = ?";
             try (PreparedStatement statement = connection.prepareStatement(insertQuery)) {
                 statement.setString(1, username);
                 statement.setString(2, password);
@@ -57,14 +67,25 @@ public class UserDB {
                     if (resultSet.next()) {
                         int id = resultSet.getInt("id");
                         String name = resultSet.getString("name");
+                        String avatarFile = resultSet.getString("avatar");
+                        String learningLanguage = resultSet.getString("learning_language");
 
-                        return new User(id, name, username, password);
+                        User user = new User();
+                        user.setId(id);
+                        user.setName(name);
+                        user.setUsername(username);
+                        user.setPassword(password);
+                        user.setAvatar(Avatar.getAvatarByFileName(avatarFile));
+                        user.setLearningLanguage(Language.getLanguageByShortName(learningLanguage));
+
+                        return user;
                     } else {
                         throw new Exception("Пользователь не найден!");
                     }
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new Exception(e);
         }
     }
@@ -76,6 +97,7 @@ public class UserDB {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new Exception(e);
         }
     }
@@ -84,7 +106,7 @@ public class UserDB {
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
             isUserTableExists();
 
-            String insertQuery = "SELECT id, name, username, password FROM user WHERE is_authorised = 1";
+            String insertQuery = "SELECT * FROM user WHERE is_authorised = 1";
             try (PreparedStatement statement = connection.prepareStatement(insertQuery)) {
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
@@ -92,11 +114,32 @@ public class UserDB {
                     String name = resultSet.getString("name");
                     String username = resultSet.getString("username");
                     String password = resultSet.getString("password");
+                    int isAuthorised  = resultSet.getInt("is_authorised");
 
-                    return new User(id, name, username, password, true);
+                    String avatarFile = resultSet.getString("avatar");
+                    String learningLanguage = resultSet.getString("learning_language");
+
+
+                    User user = new User();
+                    user.setId(id);
+                    user.setName(name);
+                    user.setUsername(username);
+                    user.setPassword(password);
+
+                    if (isAuthorised == 1) {
+                        user.setAuthorised(true);
+                    } else {
+                        user.setAuthorised(false);
+                    }
+
+                    user.setAvatar(Avatar.getAvatarByFileName(avatarFile));
+                    user.setLearningLanguage(Language.getLanguageByShortName(learningLanguage));
+
+                    return user;
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new Exception(e);
         }
 
@@ -115,6 +158,7 @@ public class UserDB {
                 return !resultSet.next();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println(e.getMessage());
         }
 
@@ -129,12 +173,15 @@ public class UserDB {
                         "name TEXT," +
                         "username TEXT," +
                         "password TEXT," +
+                        "avatar TEXT," +
+                        "learning_language TEXT," +
                         "is_authorised INTEGER)";
                 try (Statement statement = connection.createStatement()) {
                     statement.executeUpdate(createTableQuery);
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }

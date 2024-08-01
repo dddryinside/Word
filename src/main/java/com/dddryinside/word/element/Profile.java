@@ -40,7 +40,7 @@ public class Profile extends VBox {
     }
 
     private StackPane getAvatar() {
-        Image image = new Image("avatar.png"); // Замените путь на путь к вашему изображению
+        Image image = new Image("avatar_default.png"); // Замените путь на путь к вашему изображению
         ImageView imageView = new ImageView(image);
 
         // Создание круга

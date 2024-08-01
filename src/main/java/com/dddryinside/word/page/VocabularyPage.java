@@ -144,7 +144,7 @@ public class VocabularyPage implements Page {
 
     private Button setupPopupFilter() {
         Button button = new Button();
-        FontIcon filterButtonIcon = ResourceLoader.loadIcon("bi-gear" ,20);
+        FontIcon filterButtonIcon = ResourceLoader.loadIcon("bi-filter" ,20);
         button.setGraphic(filterButtonIcon);
 
         ObservableList<Language> languageValues = FXCollections.observableArrayList(Language.values());
@@ -205,7 +205,7 @@ public class VocabularyPage implements Page {
 
         button.setOnAction(event -> {
             Bounds bounds = button.localToScreen(button.getBoundsInLocal());
-            popupStage.setX(bounds.getMinX());
+            popupStage.setX(bounds.getMinX() - 100);
             popupStage.setY(bounds.getMaxY() + 10);
             popupStage.show();
         });

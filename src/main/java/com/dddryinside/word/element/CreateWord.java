@@ -18,12 +18,10 @@ public class CreateWord extends VBox {
     public CreateWord() {
         JFXTextField wordField = new JFXTextField();
         wordField.setPromptText("слово");
-        wordField.setFocusColor(AppColor.BLUE.getColor());
         wordField.setMaxWidth(250);
 
         JFXTextField translationField = new JFXTextField();
         translationField.setPromptText("перевод");
-        translationField.setFocusColor(AppColor.BLUE.getColor());
         translationField.setMaxWidth(250);
 
         JFXComboBox<Language> languagesBox = new JFXComboBox<>();

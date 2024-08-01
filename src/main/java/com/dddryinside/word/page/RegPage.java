@@ -59,8 +59,12 @@ public class RegPage implements Page {
                 if (!passwordField.getText().equals(repeatPasswordField.getText())) {
                     PageManager.showNotification("Пароли не совпадают!");
                 } else {
-                    User user = new User(nameField.getText(), usernameField.getText(),
-                            passwordField.getText(), stayAuthorised.isSelected());
+                    User user = new User();
+
+                    user.setName(nameField.getText());
+                    user.setUsername(usernameField.getText());
+                    user.setPassword(passwordField.getText());
+                    user.setAuthorised(stayAuthorised.isSelected());
 
                     DataBaseAccess.saveUser(user);
                 }

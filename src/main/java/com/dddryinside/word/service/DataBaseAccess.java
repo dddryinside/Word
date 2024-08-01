@@ -6,6 +6,7 @@ import com.dddryinside.word.page.LogInPage;
 import com.dddryinside.word.page.MainPage;
 import com.dddryinside.word.service.dataBase.UserDB;
 import com.dddryinside.word.service.dataBase.WordDB;
+import com.dddryinside.word.value.Avatar;
 import com.dddryinside.word.value.Language;
 import com.dddryinside.word.value.TrainingType;
 
@@ -19,18 +20,23 @@ public class DataBaseAccess {
         return user;
     }
 
+    public static void setUser (User user) {
+        DataBaseAccess.user = user;
+    }
+
     public static void saveUser(User user) {
         try {
+            user.setAvatar(Avatar.AVATAR_DEFAULT);
+            user.setLearningLanguage(Language.EN);
             UserDB.saveUser(user);
-            DataBaseAccess.user = user;
-            PageManager.loadPage(new MainPage());
+
             DataBaseAccess.logIn(user.getUsername(), user.getPassword(), user.isAuthorised());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void updateUser() {
+    public static void finishWork() {
         try {
             if (user != null) {
                 UserDB.updateUser(user);
@@ -84,12 +90,6 @@ public class DataBaseAccess {
     public static int getWordsAmount(TrainingType trainingType, Language language) {
         return WordDB.getWordsAmount(trainingType, language);
     }
-
-/*
-    public static List<Word> getWords(int limit) {
-        return WordDB.getWords(limit);
-    }
-*/
 
     public static List<Word> getWords() {
         return WordDB.getWords();

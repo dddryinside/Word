@@ -35,7 +35,7 @@ public class Word extends Application {
         DataBaseAccess.findAuthorisedUser();
 
         stage.setOnCloseRequest(event ->  {
-            DataBaseAccess.updateUser();
+            DataBaseAccess.finishWork();
             Platform.exit();
         });
     }
