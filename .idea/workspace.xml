@@ -4,21 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="Reworked the hotel table in the database, added profile editing, updated the main page and a few more improvements and fixes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/StatisticChart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/TrainingIteration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/TrainingDB.java" afterDir="false" />
+    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="📈 Now chart of week training history exist">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Root.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/Training.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/SettingsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/SettingsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/PageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/PageManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/SettingAccess.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/TrainingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/TrainingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/TrainingDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/TrainingDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/UserDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/UserDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722538126170</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="📈 Now chart of week training history exist">
+      <created>1722544928372</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1722544928372</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,7 +227,8 @@
     <MESSAGE value="worked on vocabulary and made new custom notification window" />
     <MESSAGE value="made a lot of improvements" />
     <MESSAGE value="Reworked the hotel table in the database, added profile editing, updated the main page and a few more improvements and fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reworked the hotel table in the database, added profile editing, updated the main page and a few more improvements and fixes" />
+    <MESSAGE value=" Now chart of week training history exist" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Now chart of week training history exist" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

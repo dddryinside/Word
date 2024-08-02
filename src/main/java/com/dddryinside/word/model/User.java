@@ -17,6 +17,7 @@ public class User {
     private String username;
     private String password;
     private Avatar avatar;
+    private int trainingLength;
     private Language learningLanguage;
     public boolean authorised;
 
@@ -27,6 +28,7 @@ public class User {
                 "\nusername = " + username +
                 "\npassword = " + password +
                 "\navatar = " + avatar +
+                "\ntraining_length = " + trainingLength +
                 "\nlearning_language = " + learningLanguage +
                 "\nauthorised = " + authorised;
     }

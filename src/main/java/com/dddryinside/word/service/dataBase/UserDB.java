@@ -12,15 +12,16 @@ public class UserDB {
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
             isUserTableExists();
 
-            String insertQuery = "INSERT INTO user (name, username, password, avatar, learning_language, is_authorised) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO user (name, username, password, avatar, training_length, learning_language, is_authorised) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(insertQuery)) {
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getUsername());
                 statement.setString(3, user.getPassword());
                 statement.setString(4, user.getAvatar().getFile());
-                statement.setString(5, user.getLearningLanguage().getShortName());
-                statement.setInt(6, user.isAuthorised() ? 1 : 0);
+                statement.setInt(5, user.getTrainingLength());
+                statement.setString(6, user.getLearningLanguage().getShortName());
+                statement.setInt(7, user.isAuthorised() ? 1 : 0);
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -31,19 +32,21 @@ public class UserDB {
 
     public static void updateUser(User user) throws Exception {
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
-            String sql = "UPDATE user SET name = ?, username = ?, password = ?, avatar = ?, learning_language = ?, is_authorised = ? WHERE id = ?";
+            String sql = "UPDATE user SET name = ?, username = ?, password = ?, avatar = ?, training_length = ?, learning_language = ?, is_authorised = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getUsername());
                 statement.setString(3, user.getPassword());
                 statement.setString(4, user.getAvatar().getFile());
-                statement.setString(5, user.getLearningLanguage().getShortName());
-                statement.setInt(6, user.isAuthorised() ? 1 : 0);
-                statement.setInt(7, user.getId());
+                statement.setInt(5, user.getTrainingLength());
+                statement.setString(6, user.getLearningLanguage().getShortName());
+                statement.setInt(7, user.isAuthorised() ? 1 : 0);
+                statement.setInt(8, user.getId());
 
                 int rowsAffected = statement.executeUpdate();
                 if (rowsAffected == 0) {
+                    System.out.println("No affected rows!");
                     throw new Exception();
                 }
             }
@@ -66,7 +69,9 @@ public class UserDB {
                         int id = resultSet.getInt("id");
                         String name = resultSet.getString("name");
                         String avatarFile = resultSet.getString("avatar");
+                        int trainingLength = resultSet.getInt("training_length");
                         String learningLanguage = resultSet.getString("learning_language");
+                        int isAuthorised  = resultSet.getInt("is_authorised");
 
                         User user = new User();
                         user.setId(id);
@@ -74,7 +79,14 @@ public class UserDB {
                         user.setUsername(username);
                         user.setPassword(password);
                         user.setAvatar(Avatar.getAvatarByFileName(avatarFile));
+                        user.setTrainingLength(trainingLength);
                         user.setLearningLanguage(Language.getLanguageByShortName(learningLanguage));
+
+                        if (isAuthorised == 1) {
+                            user.setAuthorised(true);
+                        } else {
+                            user.setAuthorised(false);
+                        }
 
                         return user;
                     } else {
@@ -112,26 +124,25 @@ public class UserDB {
                     String name = resultSet.getString("name");
                     String username = resultSet.getString("username");
                     String password = resultSet.getString("password");
-                    int isAuthorised  = resultSet.getInt("is_authorised");
-
                     String avatarFile = resultSet.getString("avatar");
+                    int trainingLength = resultSet.getInt("training_length");
                     String learningLanguage = resultSet.getString("learning_language");
-
+                    int isAuthorised  = resultSet.getInt("is_authorised");
 
                     User user = new User();
                     user.setId(id);
                     user.setName(name);
                     user.setUsername(username);
                     user.setPassword(password);
+                    user.setAvatar(Avatar.getAvatarByFileName(avatarFile));
+                    user.setTrainingLength(trainingLength);
+                    user.setLearningLanguage(Language.getLanguageByShortName(learningLanguage));
 
                     if (isAuthorised == 1) {
                         user.setAuthorised(true);
                     } else {
                         user.setAuthorised(false);
                     }
-
-                    user.setAvatar(Avatar.getAvatarByFileName(avatarFile));
-                    user.setLearningLanguage(Language.getLanguageByShortName(learningLanguage));
 
                     return user;
                 }
@@ -172,6 +183,7 @@ public class UserDB {
                         "username TEXT," +
                         "password TEXT," +
                         "avatar TEXT," +
+                        "training_length INTEGER," +
                         "learning_language TEXT," +
                         "is_authorised INTEGER)";
                 try (Statement statement = connection.createStatement()) {

@@ -56,7 +56,7 @@ public class MainPage implements Page {
 
     private VBox setupMenuButtons() {
         FontIcon newWordIcon = new FontIcon();
-        newWordIcon.setIconSize(25);
+        newWordIcon.setIconSize(20);
         newWordIcon.setIconLiteral("bi-plus-circle");
         newWordIcon.setIconColor(Paint.valueOf("GREEN"));
 

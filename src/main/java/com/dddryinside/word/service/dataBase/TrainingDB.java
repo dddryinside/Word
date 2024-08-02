@@ -1,10 +1,7 @@
 package com.dddryinside.word.service.dataBase;
 
 import com.dddryinside.word.model.Training;
-import com.dddryinside.word.model.TrainingIteration;
-import com.dddryinside.word.model.Word;
 import com.dddryinside.word.service.DataBaseAccess;
-import com.dddryinside.word.value.Language;
 
 import java.sql.*;
 import java.time.LocalDate;

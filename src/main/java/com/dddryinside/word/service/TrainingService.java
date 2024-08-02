@@ -40,7 +40,7 @@ public class TrainingService {
         training.setWord(currentWord);
         training.setTrainingType(trainingType);
         training.setOptions(getOptions());
-        training.setSize(SettingAccess.getTrainingLength());
+        training.setSize(DataBaseAccess.getUser().getTrainingLength());
         training.setIteration(iteration);
 
         iteration += 1;

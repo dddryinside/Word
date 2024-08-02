@@ -31,6 +31,7 @@ public class DataBaseAccess {
         try {
             user.setAvatar(Avatar.AVATAR_DEFAULT);
             user.setLearningLanguage(Language.EN);
+            user.setTrainingLength(10);
             UserDB.saveUser(user);
 
             DataBaseAccess.logIn(user.getUsername(), user.getPassword(), user.isAuthorised());

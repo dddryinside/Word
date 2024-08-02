@@ -150,6 +150,7 @@ public class VocabularyPage implements Page {
         ObservableList<Language> languageValues = FXCollections.observableArrayList(Language.values());
         ComboBox<Language> languagesFilter = new ComboBox<>(languageValues);
         languagesFilter.setMinWidth(200);
+        languagesFilter.setValue(DataBaseAccess.getUser().getLearningLanguage());
 
         languagesFilter.setConverter(new StringConverter<>() {
             @Override
@@ -166,6 +167,7 @@ public class VocabularyPage implements Page {
         ObservableList<Status> statusValues = FXCollections.observableArrayList(Status.values());
         ComboBox<Status> statusFilter = new ComboBox<>(statusValues);
         statusFilter.setMinWidth(200);
+        statusFilter.setValue(Status.LEARN);
 
         statusFilter.setConverter(new StringConverter<>() {
             @Override
@@ -180,18 +182,30 @@ public class VocabularyPage implements Page {
         });
 
 
+
+
+
+        Button applyButton = new Button();
+        HBox applyButtonContent = new HBox(ResourceLoader.loadIcon("bi-check2", 20), new Label("Применить фильтр"));
+        applyButtonContent.setAlignment(Pos.CENTER_LEFT);
+        applyButtonContent.setSpacing(20);
+        applyButton.setGraphic(applyButtonContent);
+        applyButton.setMinWidth(200);
+
+
         HBox buttons = new HBox(20);
         Hyperlink cancelButton = new Hyperlink("Отмена");
-        Hyperlink applyButton = new Hyperlink("Применить");
-        buttons.getChildren().addAll(cancelButton, applyButton);
+        buttons.getChildren().addAll(cancelButton);
         buttons.setAlignment(Pos.CENTER_RIGHT);
 
-        // Создаем Stage для модального окна
+
+
+
         Stage popupStage = new Stage(StageStyle.TRANSPARENT);
         popupStage.initModality(Modality.WINDOW_MODAL);
         popupStage.initOwner(PageManager.getStage());
 
-        VBox popupContent = new VBox(languagesFilter, statusFilter, buttons);
+        VBox popupContent = new VBox(languagesFilter, statusFilter, applyButton, buttons);
         popupContent.setStyle("-fx-background-color: white; -fx-border-color: #D6D6D6; -fx-border-radius: 5px; -fx-border-width: 1;");
         popupContent.setPadding(new Insets(20));
         popupContent.setSpacing(20);

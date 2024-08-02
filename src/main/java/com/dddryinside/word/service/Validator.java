@@ -31,7 +31,7 @@ public class Validator {
 
     public static boolean isPasswordValid(String password) {
         if (password == null || password.trim().isEmpty()) {
-            PageManager.showNotification("Кажется, вы забыли ввести username!");
+            PageManager.showNotification("Кажется, вы забыли ввести пароль!");
             return false;
         } else if (password.length() < 8) {
             PageManager.showNotification("Пароль не должен быть короче 8 символов!");
