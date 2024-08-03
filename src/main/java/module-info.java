@@ -10,6 +10,6 @@ module com.dddryinside.word {
     requires org.kordamp.ikonli.fontawesome;
     requires java.desktop;
 
-    opens com.dddryinside.word to javafx.fxml;
-    exports com.dddryinside.word;
+    opens com.dddryinside to javafx.fxml;
+    exports com.dddryinside;
 }

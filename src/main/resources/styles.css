@@ -8,51 +8,14 @@
     -fx-background-color: white;
 }
 
-/*.label {
-    -fx-font-size: 14px;
-}*/
-
-.mfx-text-field {
-    -fx-font-size: 14px;
-}
-
-.delete-button {
-    -fx-background-color: #FF3C3CFF
-}
-
-.menu-bar {
-    -fx-background-color: #F5F1F9;
-}
-
-.context-menu {
-    -fx-background-color: white;
-    -fx-border-width: 0px;
-    -fx-border-color: white;
-}
-
 .jfx-text-field, .jfx-password-field, .jfx-combo-box,
 .jfx-check-box, .panel-title, .jfx-radio-button {
     -fx-font-size: 14px;
 }
 
-.panel {
-    -fx-background-color: white;
-    -fx-border-color: #0095C8;
-}
-
-.panel .panel-heading {
-    -fx-background-color: #0095C8;
-    -fx-background-radius: 4px;
-    -fx-border-color: #0095C8;
-}
-
 .name-label {
     -fx-font-size: 30px;
     -fx-font-weight: bold;
-}
-
-.username-label {
-    -fx-font-size: 16px;
 }
 
 .hyperlink {
@@ -96,9 +59,6 @@
     -fx-background-color: white;
     -fx-text-fill: black;
 }
-
-
-
 
 .combo-box {
     -fx-font-size: 14px;
@@ -184,10 +144,10 @@
 }
 
 .spinner .increment-button {
-    -fx-background-color: #4CAF50; /* Цвет фона */
-    -fx-text-fill: white; /* Цвет текста */
-    -fx-font-size: 14px; /* Размер шрифта */
-    -fx-padding: 5px 10px; /* Внутренние отступы */
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
 }
 
 .check-box .box {
@@ -215,7 +175,6 @@
     -fx-border-color: red;
 }
 
-
 .scroll-bar .thumb {
     -fx-background-color: #F2F2F2;
     -fx-background-radius: 5px;
@@ -233,13 +192,6 @@
 .scroll-bar:horizontal {
     -fx-opacity: 0;
 }
-
-
-
-
-
-
-
 
 .chart-series-line,
 .chart-legend-item-symbol,

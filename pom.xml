@@ -16,25 +16,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>17.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>17.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>17.0.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jfoenix</groupId>
-            <artifactId>jfoenix</artifactId>
-            <version>9.0.2</version>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-bootstrapicons-pack</artifactId>
+            <version>12.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.kordamp.bootstrapfx</groupId>
@@ -51,15 +35,23 @@
             <artifactId>ikonli-javafx</artifactId>
             <version>12.3.1</version>
         </dependency>
+
+
+
         <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-antdesignicons-pack</artifactId>
-            <version>12.3.1</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.2</version>
         </dependency>
         <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-bootstrapicons-pack</artifactId>
-            <version>12.3.1</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.2</version>
         </dependency>
 
 
@@ -85,17 +77,19 @@
             <artifactId>slf4j-simple</artifactId>
             <version>2.0.7</version>
         </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx</artifactId>
-            <version>8.9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-swing</artifactId>
-            <version>12.3.1</version>
-        </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.kordamp.ikonli</groupId>
+                <artifactId>ikonli-bom</artifactId>
+                <version>12.3.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
@@ -109,22 +103,22 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <configuration>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>com.dddryinside.Starter</mainClass>
+                        </transformer>
+                    </transformers>
+                </configuration>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>com.dddryinside.word/com.dddryinside.word.Word</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
-                        </configuration>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

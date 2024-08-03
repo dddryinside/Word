@@ -1,35 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Word:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="⚙️Update settings, now it fully works">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/Filter.java" afterDir="false" />
+    <list default="true" id="cba82bc7-7f77-46e3-971d-ab1d65551dff" name="Changes" comment="Vocabulary page is fully working, a lot of improvements and fixes">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Word_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/Starter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/CreateWord.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/StartTraining.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/StartTraining.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/SuperLabel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/mfx/JavaFXThemes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/mfx/MaterialFXStylesheets.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/AboutPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/AboutPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/LogInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/LogInPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/NewWordPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/NewWordPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/UpdateWordPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/UpdateWordPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/PageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/PageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/Word.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/contract/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/contract/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/element/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/StartTraining.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/element/StartTraining.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/StatisticChart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/element/StatisticChart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/SuperPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/element/VPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/element/VPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/model/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/model/Training.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/TrainingIteration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/model/TrainingIteration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/model/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/model/Word.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/AboutPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/AboutPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/LogInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/LogInPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/NewWordPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/NewWordPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/RegPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/RegPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/SettingsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/SettingsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/TrainingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/TrainingPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/UpdateUserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/UpdateUserPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/UpdateWordPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/UpdateWordPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/page/VocabularyPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/page/VocabularyPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/DataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/service/DataBaseAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/PageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/service/PageManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/ResourceLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/service/ResourceLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/TrainingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/service/TrainingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/service/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/TrainingDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/service/dataBase/TrainingDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/UserDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/service/dataBase/UserDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/service/dataBase/WordDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/service/dataBase/WordDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/AppColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/value/AppColor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/Avatar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/value/Avatar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/value/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/value/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dddryinside/word/value/TrainingType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dddryinside/value/TrainingType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/translater.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +69,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -59,15 +85,19 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Projects/WordRefactoring&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Downloads/ikonli-fontawesome5-pack-12.3.1.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.47471264&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -79,20 +109,36 @@
       <recent name="C:\Projects\Word\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Word">
+  <component name="RunManager" selected="JAR Application.Word.jar">
     <configuration name="Word" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.dddryinside.word.Word" />
+      <option name="MAIN_CLASS_NAME" value="com.dddryinside.Word" />
       <module name="Word" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Word.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Word_jar/Word.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Word_jar.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Word_jar/Word_jar.jar" />
+      <method v="2" />
+    </configuration>
     <configuration name="materialfx-11.17.0.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$MAVEN_REPOSITORY$/io/github/palexdev/materialfx/11.17.0/materialfx-11.17.0.jar!/" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Word" />
+      <item itemvalue="JAR Application.Word.jar" />
+      <item itemvalue="JAR Application.Word_jar.jar" />
+      <item itemvalue="JAR Application.materialfx-11.17.0.jar" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.Word.jar" />
+        <item itemvalue="JAR Application.Word_jar.jar" />
         <item itemvalue="JAR Application.materialfx-11.17.0.jar" />
       </list>
     </recent_temporary>
@@ -218,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722590136744</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Vocabulary page is fully working, a lot of improvements and fixes">
+      <created>1722685795486</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1722685795486</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -249,7 +302,8 @@
     <MESSAGE value="Reworked the hotel table in the database, added profile editing, updated the main page and a few more improvements and fixes" />
     <MESSAGE value=" Now chart of week training history exist" />
     <MESSAGE value="⚙️Update settings, now it fully works" />
-    <option name="LAST_COMMIT_MESSAGE" value="⚙️Update settings, now it fully works" />
+    <MESSAGE value="Vocabulary page is fully working, a lot of improvements and fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Vocabulary page is fully working, a lot of improvements and fixes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
