@@ -16,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+
 public class TrainingPage implements Page {
     private final TrainingIteration training;
 

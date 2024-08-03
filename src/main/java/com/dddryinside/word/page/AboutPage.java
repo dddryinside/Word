@@ -7,7 +7,6 @@ import com.dddryinside.word.service.ResourceLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,15 +17,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.awt.Desktop;
+
 
 public class AboutPage implements Page {
     @Override
     public Scene getInterface() {
-        ImageView appIcon = new ImageView(new Image("language.png"));
+        ImageView appIcon = new ImageView(new Image("icon.png"));
         appIcon.setPreserveRatio(true);
         appIcon.setFitWidth(100);
 

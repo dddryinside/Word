@@ -222,7 +222,12 @@
 }
 
 .scroll-bar {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 15;
+    -fx-padding: 1;
 }
 
 .scroll-bar:horizontal {

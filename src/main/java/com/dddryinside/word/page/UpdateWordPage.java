@@ -6,6 +6,7 @@ import com.dddryinside.word.model.Word;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
 import com.dddryinside.word.service.ResourceLoader;
+import com.dddryinside.word.service.Validator;
 import com.dddryinside.word.value.Language;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -76,16 +77,22 @@ public class UpdateWordPage implements Page {
         deleteButton.setMinWidth(250);
         deleteButton.setGraphic(deleteButtonContent);
         deleteButton.setOnAction(event -> {
-            PageManager.showConfirmation("Удалить слово «" + word.getWord() + "»?", "Это действие невозможно будет отменить. " +
-                    "Вы уверены, что хотите удалить это слово из своего словаря?");
-            //DataBaseAccess.deleteWord(word);
+            if (PageManager.showConfirmation("Удалить слово «" + word.getWord() + "»?", "Это действие невозможно будет отменить. " +
+                    "Вы уверены, что хотите удалить это слово из своего словаря?")) {
+                DataBaseAccess.deleteWord(word);
+                PageManager.loadPage(new VocabularyPage(null, null));
+            }
         });
 
 
         Hyperlink escapeButton = new Hyperlink("Отмена");
-        escapeButton.setOnAction(event -> PageManager.loadPage(new VocabularyPage()));
+        escapeButton.setOnAction(event -> PageManager.loadPage(new VocabularyPage(null, null)));
         Hyperlink saveButton = new Hyperlink("Сохранить");
-        saveButton.setOnAction(event -> updateWord(wordField.getText(), translationField.getText(), languagesComboBox.getValue()));
+        saveButton.setOnAction(event -> {
+            updateWord(wordField.getText(),
+                    translationField.getText(), languagesComboBox.getValue(), statusCheckBox.isSelected());
+            PageManager.loadPage(new VocabularyPage(null, null));
+        });
 
         HBox buttons = new HBox(escapeButton, saveButton);
         buttons.setAlignment(Pos.CENTER_RIGHT);
@@ -111,7 +118,21 @@ public class UpdateWordPage implements Page {
         return new Scene(container);
     }
 
-    private void updateWord(String word, String translation, Language language) {
+    private void updateWord(String word, String translation, Language language, boolean status) {
+        if (Validator.isWordValid(word) && Validator.isTranslationValid(translation)) {
+            Word updatedWord = new Word();
+            updatedWord.setId(this.word.getId());
+            updatedWord.setWord(word);
+            updatedWord.setTranslation(translation);
+            updatedWord.setLanguage(language);
 
+            if (status) {
+                updatedWord.setStatus(1);
+            } else {
+                updatedWord.setStatus(0);
+            }
+
+            DataBaseAccess.updateWord(updatedWord);
+        }
     }
 }

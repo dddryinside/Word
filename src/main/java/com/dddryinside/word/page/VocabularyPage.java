@@ -1,14 +1,13 @@
 package com.dddryinside.word.page;
 
 import com.dddryinside.word.contract.Page;
+import com.dddryinside.word.model.Filter;
 import com.dddryinside.word.model.Word;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
 import com.dddryinside.word.service.ResourceLoader;
 import com.dddryinside.word.value.Language;
 import com.dddryinside.word.value.Status;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.enums.ButtonType;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,7 +17,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,6 +31,33 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.util.*;
 
 public class VocabularyPage implements Page {
+    private static Filter filter;
+    private final int pagesAmount;
+    private static Integer pageNumber;
+
+
+
+
+    public VocabularyPage(Filter filter, Integer pageNumber) {
+        if (filter != null) {
+            VocabularyPage.filter = filter;
+        } else {
+            if (VocabularyPage.filter == null) {
+                Filter standartFilter = new Filter();
+                standartFilter.setLanguage(DataBaseAccess.getUser().getLearningLanguage());
+                standartFilter.setStatus(Status.LEARN);
+                VocabularyPage.filter = standartFilter;
+            }
+        }
+
+        if (pageNumber != null) {
+            VocabularyPage.pageNumber = pageNumber;
+        } else {
+            VocabularyPage.pageNumber = 1;
+        }
+
+        pagesAmount = DataBaseAccess.getVocabularyPagesAmount(VocabularyPage.filter);
+    }
 
     @Override
     public Scene getInterface() {
@@ -41,16 +69,12 @@ public class VocabularyPage implements Page {
             borderPane.setCenter(setupTable(data));
             borderPane.setBottom(setupBottomPanel());
         } else {
-            Label emptyDataBaseMessage = new Label("В вашем словаре пусто. ");
+            Label emptyDataBaseMessage = new Label("Ничего не найдено...");
             emptyDataBaseMessage.setFont(Font.font(14));
 
-            Hyperlink escapeButton = new Hyperlink("Назад");
-            escapeButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
-
-            HBox content = new HBox(emptyDataBaseMessage, escapeButton);
-            content.setAlignment(Pos.CENTER);
-
-            borderPane.setCenter(content);
+            borderPane.setTop(setupTopPanel());
+            borderPane.setCenter(emptyDataBaseMessage);
+            borderPane.setBottom(setupBottomPanel());
         }
 
         return new Scene(borderPane);
@@ -62,12 +86,24 @@ public class VocabularyPage implements Page {
         Button prevButton = new Button();
         prevButton.setGraphic(prevButtonContent);
 
+        prevButton.setOnAction(event -> {
+            if (pageNumber > 1) {
+                PageManager.loadPage(new VocabularyPage(null, pageNumber - 1));
+            }
+        });
+
         HBox nextButtonContent = new HBox(ResourceLoader.loadIcon("bi-arrow-right-circle", 20));
         nextButtonContent.setSpacing(10);
         Button nextButton = new Button();
         nextButton.setGraphic(nextButtonContent);
 
-        Label pageNumberLabel = new Label("1");
+        nextButton.setOnAction(event -> {
+            if (pagesAmount > pageNumber) {
+                PageManager.loadPage(new VocabularyPage(null, pageNumber + 1));
+            }
+        });
+
+        Label pageNumberLabel = new Label(String.valueOf(pageNumber));
         pageNumberLabel.setFont(Font.font(14));
 
         HBox bottomPanel = new HBox(prevButton, pageNumberLabel, nextButton);
@@ -84,18 +120,18 @@ public class VocabularyPage implements Page {
 
         TableColumn<TableWord, String> wordColumn = new TableColumn<>("Слово");
         wordColumn.setCellValueFactory(param -> param.getValue().getWord());
-        wordColumn.setMinWidth(250);
-        wordColumn.setMaxWidth(250);
+        wordColumn.setMinWidth(240);
+        wordColumn.setMaxWidth(240);
 
         TableColumn<TableWord, String> translationColumn = new TableColumn<>("Перевод");
         translationColumn.setCellValueFactory(param -> param.getValue().getTranslation());
-        translationColumn.setMinWidth(250);
-        translationColumn.setMaxWidth(250);
+        translationColumn.setMinWidth(240);
+        translationColumn.setMaxWidth(240);
 
         TableColumn<TableWord, String> statusColumn = new TableColumn<>("Статус");
         statusColumn.setCellValueFactory(param -> param.getValue().getStatus());
-        statusColumn.setMinWidth(250);
-        statusColumn.setMaxWidth(250);
+        statusColumn.setMinWidth(240);
+        statusColumn.setMaxWidth(240);
 
         TableColumn<TableWord, Button> editColumn = new TableColumn<>();
         editColumn.setCellValueFactory(param -> param.getValue().getEditButton());
@@ -110,10 +146,6 @@ public class VocabularyPage implements Page {
 
         table.setItems(data);
 
-/*        table.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            selectedWordProperty.set(newValue);
-        });*/
-
         return table;
     }
 
@@ -125,10 +157,35 @@ public class VocabularyPage implements Page {
         TextField searchField = new TextField();
         searchField.setMinWidth(250);
         searchField.setPromptText("Поиск");
+        searchField.setText(filter.getQuery());
+
+        searchField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if (searchField.getText() == null) {
+                    filter.setQuery(null);
+                } else if (searchField.getText().isEmpty()) {
+                    filter.setQuery(null);
+                } else {
+                    filter.setQuery(searchField.getText());
+                }
+
+                PageManager.loadPage(new VocabularyPage(filter, pageNumber));
+            }
+        });
 
         Button searchButton = new Button();
         searchButton.setGraphic(ResourceLoader.loadIcon("bi-search", 20));
-        //searchButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
+        searchButton.setOnAction(event -> {
+            if (searchField.getText() == null) {
+                filter.setQuery(null);
+            } else if (searchField.getText().isEmpty()) {
+                filter.setQuery(null);
+            } else {
+                filter.setQuery(searchField.getText());
+            }
+
+            PageManager.loadPage(new VocabularyPage(filter, pageNumber));
+        });
 
         HBox topPanel = new HBox(escapeButton, searchField, searchButton, setupPopupFilter());
         topPanel.setPadding(new Insets(10, 0, 10, 0));
@@ -143,14 +200,18 @@ public class VocabularyPage implements Page {
     }
 
     private Button setupPopupFilter() {
-        Button button = new Button();
+        Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+
+
+
+        Button filterButton = new Button();
         FontIcon filterButtonIcon = ResourceLoader.loadIcon("bi-filter" ,20);
-        button.setGraphic(filterButtonIcon);
+        filterButton.setGraphic(filterButtonIcon);
 
         ObservableList<Language> languageValues = FXCollections.observableArrayList(Language.values());
         ComboBox<Language> languagesFilter = new ComboBox<>(languageValues);
         languagesFilter.setMinWidth(200);
-        languagesFilter.setValue(DataBaseAccess.getUser().getLearningLanguage());
+        languagesFilter.setValue(filter.getLanguage());
 
         languagesFilter.setConverter(new StringConverter<>() {
             @Override
@@ -167,7 +228,7 @@ public class VocabularyPage implements Page {
         ObservableList<Status> statusValues = FXCollections.observableArrayList(Status.values());
         ComboBox<Status> statusFilter = new ComboBox<>(statusValues);
         statusFilter.setMinWidth(200);
-        statusFilter.setValue(Status.LEARN);
+        statusFilter.setValue(filter.getStatus());
 
         statusFilter.setConverter(new StringConverter<>() {
             @Override
@@ -181,31 +242,36 @@ public class VocabularyPage implements Page {
             }
         });
 
-
-
-
-
         Button applyButton = new Button();
         HBox applyButtonContent = new HBox(ResourceLoader.loadIcon("bi-check2", 20), new Label("Применить фильтр"));
         applyButtonContent.setAlignment(Pos.CENTER_LEFT);
         applyButtonContent.setSpacing(20);
         applyButton.setGraphic(applyButtonContent);
         applyButton.setMinWidth(200);
+        applyButton.setOnAction(event -> {
+            filter.setLanguage(languagesFilter.getValue());
+            filter.setStatus(statusFilter.getValue());
+            popupStage.hide();
+
+            PageManager.loadPage(new VocabularyPage(filter, null));
+        });
 
 
-        HBox buttons = new HBox(20);
-        Hyperlink cancelButton = new Hyperlink("Отмена");
-        buttons.getChildren().addAll(cancelButton);
-        buttons.setAlignment(Pos.CENTER_RIGHT);
+        Button cancelButton = new Button();
+        FontIcon closeIcon = ResourceLoader.loadIcon("bi-x-circle", 20);
+        closeIcon.setIconColor(Paint.valueOf("RED"));
+        cancelButton.setGraphic(closeIcon);
+        cancelButton.setOnAction(event -> popupStage.hide());
+
+        HBox closeButtonContainer = new HBox(20);
+        closeButtonContainer.getChildren().addAll(cancelButton);
+        closeButtonContainer.setAlignment(Pos.CENTER_RIGHT);
 
 
-
-
-        Stage popupStage = new Stage(StageStyle.TRANSPARENT);
         popupStage.initModality(Modality.WINDOW_MODAL);
         popupStage.initOwner(PageManager.getStage());
 
-        VBox popupContent = new VBox(languagesFilter, statusFilter, applyButton, buttons);
+        VBox popupContent = new VBox(closeButtonContainer, languagesFilter, statusFilter, applyButton);
         popupContent.setStyle("-fx-background-color: white; -fx-border-color: #D6D6D6; -fx-border-radius: 5px; -fx-border-width: 1;");
         popupContent.setPadding(new Insets(20));
         popupContent.setSpacing(20);
@@ -217,20 +283,18 @@ public class VocabularyPage implements Page {
         popupScene.getStylesheets().add("styles.css");
         popupStage.setScene(popupScene);
 
-        button.setOnAction(event -> {
-            Bounds bounds = button.localToScreen(button.getBoundsInLocal());
+        filterButton.setOnAction(event -> {
+            Bounds bounds = filterButton.localToScreen(filterButton.getBoundsInLocal());
             popupStage.setX(bounds.getMinX() - 100);
             popupStage.setY(bounds.getMaxY() + 10);
             popupStage.show();
         });
 
-        cancelButton.setOnAction(event -> popupStage.hide());
-
-        return button;
+        return filterButton;
     }
 
     private ObservableList<TableWord> getTableWordsFromDB() {
-        List<Word> words = DataBaseAccess.getWords();
+        List<Word> words = DataBaseAccess.getWords(filter, pageNumber);
 
         ObservableList<TableWord> tableWords = FXCollections.observableArrayList();
         for (Word word : words) {
@@ -238,7 +302,6 @@ public class VocabularyPage implements Page {
         }
         return tableWords;
     }
-
 
     @Getter
     public static class TableWord {

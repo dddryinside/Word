@@ -1,8 +1,10 @@
 package com.dddryinside.word.service.dataBase;
 
+import com.dddryinside.word.model.Filter;
 import com.dddryinside.word.model.Word;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.value.Language;
+import com.dddryinside.word.value.Status;
 import com.dddryinside.word.value.TrainingType;
 
 import java.sql.*;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WordDB {
-    public static void saveWord(Word word) {
+    public static void saveWord(Word word) throws Exception {
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
             isWordsTableExists();
 
@@ -25,7 +27,7 @@ public class WordDB {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 
@@ -47,53 +49,70 @@ public class WordDB {
         }
     }
 
-    public static List<Word> getWords() {
-        List<Word> words = new ArrayList<>();
+    public static void deleteWord(Word word) throws Exception {
+        try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
+            isWordsTableExists();
+
+                String updateQuery = "DELETE FROM word WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(updateQuery)) {
+                statement.setInt(1, word.getId());
+
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new Exception(e);
+        }
+    }
+
+    public static int getWordsAmount(Status status, Language language) {
+        int tableSize = 0;
 
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
             isWordsTableExists();
 
-            String query = "SELECT * FROM word WHERE user_id = ?";
+            String query = "SELECT COUNT(*) AS table_size FROM word WHERE user_id = ? AND status = ? AND language = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, DataBaseAccess.getUser().getId());
+
+                if (status == Status.LEARNED) {
+                    statement.setInt(2, 1);
+                } else {
+                    statement.setInt(2, 0);
+                }
+
+                statement.setString(3, language.getShortName());
                 ResultSet resultSet = statement.executeQuery();
 
-                while (resultSet.next()) {
-                    Word word = new Word();
-
-                    word.setId(resultSet.getInt("id"));
-                    word.setUser(DataBaseAccess.getUser());
-                    word.setWord(resultSet.getString("word"));
-                    word.setTranslation(resultSet.getString("translation"));
-                    word.setLanguage(Language.getLanguageByShortName(resultSet.getString("language")));
-                    word.setStatus(resultSet.getInt("status"));
-
-                    words.add(word);
+                if (resultSet.next()) {
+                    tableSize = resultSet.getInt("table_size");
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return words;
+        return tableSize;
     }
 
-    public static int getWordsAmount(TrainingType trainingType, Language language) {
+    public static int getWordsAmount(Filter filter) {
         int tableSize = 0;
 
         try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
             isWordsTableExists();
 
-            int status = 0;
-            if (trainingType == TrainingType.REPETITION) {
-                status = 1;
-            }
-
-            String query = "SELECT COUNT(*) AS table_size FROM word WHERE user_id = ? AND status = ? AND language = ?";
+            String query = "SELECT COUNT(*) AS table_size FROM word WHERE user_id = ? AND status = ? AND language = ? AND (word = ? OR translation = ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, DataBaseAccess.getUser().getId());
-                statement.setInt(2, status);
-                statement.setString(3, language.getShortName());
+
+                if (filter.getStatus() == Status.LEARNED) {
+                    statement.setInt(2, 1);
+                } else {
+                    statement.setInt(2, 0);
+                }
+
+                statement.setString(3, filter.getLanguage().getShortName());
+                statement.setString(4, filter.getQuery());
+                statement.setString(5, filter.getQuery());
                 ResultSet resultSet = statement.executeQuery();
 
                 if (resultSet.next()) {
@@ -141,6 +160,87 @@ public class WordDB {
         }
 
         return null;
+    }
+
+    public static List<Word> getWords(Status status, Language language, int pageNumber) {
+        try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
+            isWordsTableExists();
+
+            int pageSize = 20;
+
+            String insertQuery = "SELECT * FROM word WHERE user_id = ? AND status = ? AND language = ? ORDER BY id DESC LIMIT ? OFFSET ?";
+            PreparedStatement statement = connection.prepareStatement(insertQuery);
+            statement.setInt(1, DataBaseAccess.getUser().getId());
+
+            if (status == Status.LEARN) {
+                statement.setInt(2, 0);
+            } else {
+                statement.setInt(2, 1);
+            }
+
+            statement.setString(3, language.getShortName());
+            statement.setInt(4, pageSize);
+            statement.setInt(5, (pageNumber - 1) * pageSize);
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Word> words = new ArrayList<>();
+            while (resultSet.next()) {
+                words.add(getWordObject(resultSet));
+            }
+
+            return words;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Word> getWords(Filter filter, int pageNumber) {
+        try (Connection connection = DriverManager.getConnection(DataBaseAccess.DB_URL)) {
+            isWordsTableExists();
+
+            int pageSize = 20;
+
+            String insertQuery = "SELECT * FROM word WHERE user_id = ? AND status = ? AND language = ? AND (word = ? OR translation = ?) ORDER BY id DESC LIMIT ? OFFSET ?";
+            PreparedStatement statement = connection.prepareStatement(insertQuery);
+            statement.setInt(1, DataBaseAccess.getUser().getId());
+
+            if (filter.getStatus() == Status.LEARN) {
+                statement.setInt(2, 0);
+            } else {
+                statement.setInt(2, 1);
+            }
+
+            statement.setString(3, filter.getLanguage().getShortName());
+
+            statement.setString(4, filter.getQuery());
+            statement.setString(5, filter.getQuery());
+
+            statement.setInt(6, pageSize);
+            statement.setInt(7, (pageNumber - 1) * pageSize);
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Word> words = new ArrayList<>();
+            while (resultSet.next()) {
+                words.add(getWordObject(resultSet));
+            }
+
+            return words;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Word getWordObject(ResultSet resultSet) throws SQLException {
+        Word word = new Word();
+
+        word.setId(resultSet.getInt("id"));
+        word.setUser(DataBaseAccess.getUser());
+        word.setWord(resultSet.getString("word"));
+        word.setTranslation(resultSet.getString("translation"));
+        word.setLanguage(Language.getLanguageByShortName(resultSet.getString("language")));
+        word.setStatus(resultSet.getInt("status"));
+
+        return word;
     }
 
     private static void isWordsTableExists() {

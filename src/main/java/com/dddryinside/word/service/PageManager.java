@@ -1,12 +1,11 @@
 package com.dddryinside.word.service;
 
 import com.dddryinside.word.contract.Page;
-import com.jfoenix.controls.JFXAlert;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,12 +16,11 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import lombok.Locked;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PageManager {
     private static Stage stage;
@@ -60,11 +58,11 @@ public class PageManager {
         notificationStage.setMaxHeight(170);
 
         notificationStage.setTitle("Сообщение");
-        Image icon = new Image("language.png");
+        Image icon = new Image("icon.png");
         notificationStage.getIcons().add(icon);
 
-        FontIcon infoIcon = ResourceLoader.loadIcon("bi-info-circle", 50);
-        infoIcon.setIconColor(Paint.valueOf("#0095C8"));
+        FontIcon infoIcon = ResourceLoader.loadIcon("bi-chat-text", 50);
+        infoIcon.setIconColor(Paint.valueOf("GREY"));
         Label messageLabel = new Label(message);
         messageLabel.setWrapText(true);
         messageLabel.setFont(Font.font(14));
@@ -89,14 +87,65 @@ public class PageManager {
     }
 
     public static boolean showConfirmation(String message, String description) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Подтверждение");
-        alert.setHeaderText(message);
-        alert.setContentText(description);
-        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-        alertStage.getIcons().add(new Image("icon.png"));
+        BooleanProperty result = new SimpleBooleanProperty(false);
 
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == ButtonType.OK;
+        // Создание и настройка окна уведомления
+        Stage notificationStage = new Stage();
+        notificationStage.initModality(Modality.APPLICATION_MODAL);
+        notificationStage.setResizable(false);
+        notificationStage.setWidth(470);
+        notificationStage.setMinHeight(170);
+        notificationStage.setTitle("Подтверждение");
+        notificationStage.getIcons().add(new Image("icon.png"));
+
+        // Создание и настройка меток сообщения и описания
+        Label messageLabel = new Label(message);
+        messageLabel.setWrapText(true);
+        messageLabel.setFont(Font.font(14));
+
+        Label descriptionLabel = new Label(description);
+        descriptionLabel.setWrapText(true);
+        descriptionLabel.setFont(Font.font(14));
+
+        // Контейнер для меток сообщения и описания
+        VBox messageContainer = new VBox(10, messageLabel, descriptionLabel);
+        messageContainer.setMinHeight(100);
+
+        // Иконка информации
+        FontIcon infoIcon = ResourceLoader.loadIcon("bi-question-circle", 50);
+        infoIcon.setIconColor(Paint.valueOf("GREY"));
+
+        // Контейнер для иконки и меток
+        HBox infoContainer = new HBox(20, infoIcon, messageContainer);
+
+        // Кнопки подтверждения и отмены
+        Hyperlink closeButton = new Hyperlink("Отмена");
+        closeButton.setOnAction(event -> {
+            result.set(false);
+            notificationStage.close();
+        });
+
+        Hyperlink okButton = new Hyperlink("Подтвердить");
+        okButton.setOnAction(event -> {
+            result.set(true);
+            notificationStage.close();
+        });
+
+        // Контейнер для кнопок
+        HBox buttonsContainer = new HBox(20, closeButton, okButton);
+        buttonsContainer.setAlignment(Pos.BASELINE_RIGHT);
+
+        // Основной контейнер и настройки сцены
+        BorderPane root = new BorderPane();
+        root.setCenter(infoContainer);
+        root.setBottom(buttonsContainer);
+        root.setPadding(new Insets(20));
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("styles.css");
+        notificationStage.setScene(scene);
+        notificationStage.showAndWait();
+
+        return result.get();
     }
 }

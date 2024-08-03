@@ -4,18 +4,11 @@ import com.dddryinside.word.contract.Page;
 import com.dddryinside.word.element.VPane;
 import com.dddryinside.word.service.DataBaseAccess;
 import com.dddryinside.word.service.PageManager;
-import com.dddryinside.word.value.AppColor;
-import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class LogInPage implements Page {

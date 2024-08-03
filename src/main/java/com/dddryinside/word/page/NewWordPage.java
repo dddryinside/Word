@@ -56,13 +56,13 @@ public class NewWordPage implements Page {
             }
         });
         languagesComboBox.setMinWidth(250);
+        languagesComboBox.setValue(DataBaseAccess.getUser().getLearningLanguage());
 
         Hyperlink escapeButton = new Hyperlink("Отмена");
         escapeButton.setOnAction(event -> PageManager.loadPage(new MainPage()));
         Hyperlink saveButton = new Hyperlink("Сохранить");
         saveButton.setOnAction(event -> {
             saveWord(wordField.getText(), translationField.getText(), languagesComboBox.getValue());
-            PageManager.loadPage(new MainPage());
         });
 
         HBox buttons = new HBox(escapeButton, saveButton);
@@ -86,8 +86,9 @@ public class NewWordPage implements Page {
     }
 
     private void saveWord(String word, String translation, Language language) {
-        if (Validator.isWordValid(word) && Validator.isTranslationValid(translation) && Validator.isLanguageValid(language)) {
+        if (Validator.isWordValid(word) && Validator.isTranslationValid(translation)) {
             DataBaseAccess.saveWord(new Word(DataBaseAccess.getUser(), word, translation, language, 0));
+            PageManager.loadPage(new MainPage());
         }
     }
 }

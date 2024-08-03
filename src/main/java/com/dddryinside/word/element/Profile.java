@@ -1,66 +1,72 @@
 package com.dddryinside.word.element;
 
 import com.dddryinside.word.model.User;
+import com.dddryinside.word.page.UpdateUserPage;
 import com.dddryinside.word.service.DataBaseAccess;
+import com.dddryinside.word.service.PageManager;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 
 public class Profile extends VBox {
-    public Profile(User user) {
-/*        Label nameLabel = new Label(user.getName());
-        nameLabel.setWrapText(true);
-        nameLabel.getStyleClass().add("name-label");*/
+    public Profile() {
+        HBox profilePanel = new HBox(getAvatar(), setupProfileInfo());
+        profilePanel.setSpacing(30);
+
+        StartTraining trainingStart = new StartTraining();
+
+        this.getChildren().addAll(profilePanel, trainingStart);
+        this.setSpacing(25);
+    }
+
+    private VBox setupProfileInfo() {
+        User user = DataBaseAccess.getUser();
+
+        Label name = new Label(user.getName());
+        name.getStyleClass().add("name-label");
+        name.setWrapText(true);
 
         Label username = new Label("@" + user.getUsername());
         username.getStyleClass().add("username-label");
 
         Hyperlink editProfileButton = new Hyperlink("Редактировать");
+        editProfileButton.setOnAction(event -> PageManager.loadPage(new UpdateUserPage()));
         Hyperlink logOutButton = new Hyperlink("Выйти");
         logOutButton.setOnAction(event -> DataBaseAccess.logOut());
 
         HBox buttonsBox = new HBox(editProfileButton, logOutButton);
         buttonsBox.setSpacing(10);
 
+        VBox container = new VBox(name, username, buttonsBox);
+        container.setMinWidth(350);
 
-
-        this.getChildren().addAll(getAvatar(), username, buttonsBox);
-        this.setMaxWidth(400);
-
-
-
-/*        Background DEFAULT_BACKGROUND = new Background(new BackgroundFill(Color.LIGHTGRAY, null, null));
-        this.setBackground(DEFAULT_BACKGROUND);*/
+        return container;
     }
 
-    private StackPane getAvatar() {
-        Image image = new Image("avatar_default.png"); // Замените путь на путь к вашему изображению
+    private ImageView getAvatar() {
+        Image image = new Image(DataBaseAccess.getUser().getAvatar().getFile());
         ImageView imageView = new ImageView(image);
 
         // Создание круга
         Circle circle = new Circle();
-        circle.setRadius(50); // Установите радиус круга
-        circle.setCenterX(50); // Центр круга по оси X
-        circle.setCenterY(50); // Центр круга по оси Y
+        circle.setRadius(50);
+        circle.setCenterX(50);
+        circle.setCenterY(50);
 
         // Установка маски
         imageView.setClip(circle);
 
-        // Установка размеров ImageView, чтобы оно соответствовало размерам круга
-        imageView.setFitWidth(100); // Установите ширину, равную диаметру круга
-        imageView.setFitHeight(100); // Установите высоту, равную диаметру круга
-        imageView.setPreserveRatio(true); // Сохранение пропорций изображения
-        imageView.setSmooth(true); // Плавное отображение изображения
 
-        // Добавление ImageView в сцену
-        StackPane root = new StackPane(imageView);
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
 
-        return root;
+        return imageView;
     }
 }

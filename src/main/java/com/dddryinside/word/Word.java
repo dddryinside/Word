@@ -14,23 +14,10 @@ public class Word extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Word");
-        Image icon = new Image("language.png");
+        Image icon = new Image("icon.png");
         stage.getIcons().add(icon);
         PageManager.setStage(stage);
         PageManager.setWindowSize(600, 900);
-
-/*        UserAgentBuilder.builder()
-                .themes(JavaFXThemes.MODENA) // Optional if you don't need JavaFX's default theme, still recommended though
-                .themes(MaterialFXStylesheets.forAssemble(true)) // Adds the MaterialFX's default theme. The boolean argument is to include legacy controls
-                .setDeploy(true) // Whether to deploy each theme's assets on a temporary dir on the disk
-                .setResolveAssets(true)
-                .build()
-                .setGlobal();*/
-
-
-        //PageManager.loadPage(new Test());
-
-
 
         DataBaseAccess.findAuthorisedUser();
 

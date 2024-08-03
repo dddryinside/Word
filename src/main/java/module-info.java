@@ -4,11 +4,11 @@ module com.dddryinside.word {
     requires lombok;
     requires java.sql;
     requires com.jfoenix;
-    requires MaterialFX;
 
     requires org.kordamp.ikonli.core;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.fontawesome;
+    requires java.desktop;
 
     opens com.dddryinside.word to javafx.fxml;
     exports com.dddryinside.word;

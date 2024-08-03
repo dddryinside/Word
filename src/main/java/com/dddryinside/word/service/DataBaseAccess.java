@@ -1,5 +1,6 @@
 package com.dddryinside.word.service;
 
+import com.dddryinside.word.model.Filter;
 import com.dddryinside.word.model.Training;
 import com.dddryinside.word.model.User;
 import com.dddryinside.word.model.Word;
@@ -10,6 +11,7 @@ import com.dddryinside.word.service.dataBase.UserDB;
 import com.dddryinside.word.service.dataBase.WordDB;
 import com.dddryinside.word.value.Avatar;
 import com.dddryinside.word.value.Language;
+import com.dddryinside.word.value.Status;
 import com.dddryinside.word.value.TrainingType;
 
 import java.util.ArrayList;
@@ -88,15 +90,29 @@ public class DataBaseAccess {
     }
 
     public static void saveWord(Word word) {
-        WordDB.saveWord(word);
+        try {
+            WordDB.saveWord(word);
+            user.setLearningLanguage(word.getLanguage());
+        } catch (Exception e) {
+            PageManager.showNotification("Ошибка в работе базы данных!");
+        }
+
     }
 
     public static int getWordsAmount(TrainingType trainingType, Language language) {
-        return WordDB.getWordsAmount(trainingType, language);
+        if (trainingType == TrainingType.LEARNING) {
+            return WordDB.getWordsAmount(Status.LEARN, language);
+        } else {
+            return WordDB.getWordsAmount(Status.LEARNED, language);
+        }
     }
 
-    public static List<Word> getWords() {
-        return WordDB.getWords();
+    public static void deleteWord(Word word) {
+        try {
+            WordDB.deleteWord(word);
+        } catch (Exception e) {
+            PageManager.showNotification("Ошибка в работе базы данных!");
+        }
     }
 
     public static Word getRandomWord(TrainingType trainingType, Language language) {
@@ -144,5 +160,39 @@ public class DataBaseAccess {
         }
 
         return trainingHistory;
+    }
+
+
+
+
+    public static int getVocabularyPagesAmount(Filter filter) {
+        int pageSize = 20;
+        int totalValue;
+
+        if (filter.getQuery() == null) {
+            totalValue = WordDB.getWordsAmount(filter.getStatus(), filter.getLanguage());
+        } else {
+            totalValue = WordDB.getWordsAmount(filter);
+        }
+
+        int totalPages = totalValue / pageSize;
+        if (totalValue % pageSize != 0) {
+            totalPages++;
+        }
+
+        return totalPages;
+    }
+
+
+    public static List<Word> getWords(Filter filter, int pageNumber) {
+        List<Word> words;
+
+        if (filter.getQuery() == null) {
+            words = WordDB.getWords(filter.getStatus(), filter.getLanguage(), pageNumber);
+        } else {
+            words = WordDB.getWords(filter, pageNumber);
+        }
+
+        return words;
     }
 }

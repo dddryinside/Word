@@ -5,14 +5,12 @@ import com.dddryinside.word.service.PageManager;
 import com.dddryinside.word.service.TrainingService;
 import com.dddryinside.word.value.Language;
 import com.dddryinside.word.value.TrainingType;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.enums.ButtonType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.StringConverter;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -21,7 +19,7 @@ public class StartTraining extends HBox {
     public StartTraining() {
         ObservableList<TrainingType> trainingTypes = FXCollections.observableArrayList(TrainingType.values());
         ComboBox<TrainingType> trainingTypesComboBox = new ComboBox<>(trainingTypes);
-        trainingTypesComboBox.setMinWidth(200);
+        trainingTypesComboBox.setMinWidth(230);
         trainingTypesComboBox.setValue(TrainingType.LEARNING);
 
         trainingTypesComboBox.setConverter(new StringConverter<>() {
@@ -38,7 +36,7 @@ public class StartTraining extends HBox {
 
         ObservableList<Language> languages = FXCollections.observableArrayList(Language.values());
         ComboBox<Language> languagesComboBox = new ComboBox<>(languages);
-        languagesComboBox.setMinWidth(200);
+        languagesComboBox.setMinWidth(230);
 
         languagesComboBox.setConverter(new StringConverter<>() {
             @Override
@@ -51,7 +49,7 @@ public class StartTraining extends HBox {
                 return null;
             }
         });
-        languagesComboBox.setValue(Language.EN);
+        languagesComboBox.setValue(DataBaseAccess.getUser().getLearningLanguage());
 
         FontIcon goIcon = new FontIcon();
         goIcon.setIconSize(25);
@@ -62,9 +60,8 @@ public class StartTraining extends HBox {
         goButtonContainer.setAlignment(Pos.CENTER_LEFT);
         goButtonContainer.setSpacing(10);
 
-        MFXButton goButton = new MFXButton(null);
+        Button goButton = new Button(null);
         goButton.setGraphic(goButtonContainer);
-        goButton.setButtonType(ButtonType.FLAT);
 
         goButton.setOnAction(event -> {
             TrainingType trainingType = trainingTypesComboBox.getValue();
